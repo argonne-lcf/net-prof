@@ -14,7 +14,7 @@ pip install net-prof
 ```
 import net-prof
 
-before_counters = net-prof.collect(metrics_location=/sys/class/cxi/cxi{device}/device/telemetry [optional])
+before_counters = net-prof.collect(metrics_location="/sys/class/cxi/cxi0/device/telemetry"" [optional])
 dist.all_reduce(x, op=dist.ReduceOp.SUM)  
 after_counters=net-prof.collect()
 
@@ -26,12 +26,15 @@ net-prof.visualize(outfile=report.html)
 ```
 import net-prof
 
-before_counters = net-prof.collect(metrics_location=/sys/class/cxi/cxi{device}/device/telemetry [optional])
+before_counters = net-prof.collect(metrics_location="/sys/class/cxi/cxi0/device/telemetry" [optional])
 os.execute('ping google.com')
 after_counters=net-prof.collect()
 
 print(net-prof.summarize())
 ```
+
+Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8]
+
 
 ### Profiler Snapshots
 
