@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "net-prof"
+version = "0.1.0"
+description = "My cool package"
+authors = [
+    { name="Anthony Cardia", email="you@example.com" }
+    { name="Kaushik Velusamy", email="kaushikvelusamy@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/argonne-lcf/net-prof"
+
+[tool.setuptools.packages.find]
+where = ["."]
