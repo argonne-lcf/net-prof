@@ -8,9 +8,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 from net_prof import summarize, dump # , dump_report
 
-before = "/home/kvelusamy/Desktop/net-prof/example/before.txt"
-after = "/home/kvelusamy/Desktop/net-prof/example/after.txt"
-metrics = "src/net_prof/data/metrics.txt"  # or dynamically using importlib if you prefer
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, '..'))  # go up from tests/
+
+before = os.path.join(project_root, "example", "before.txt")
+after = os.path.join(project_root, "example", "after.txt")
+metrics = os.path.join(project_root, "src", "net_prof", "data", "metrics.txt")
 
 # If you want to test collect, uncomment below:
 # collect("before.txt")
