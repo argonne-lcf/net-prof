@@ -143,3 +143,56 @@ def dump(summary: Dict):
             diff = data['diffs'].get(i, 0)
             row += f" {diff:<{iface_w}}"
         print(row)
+        
+        
+def dump_html(summary: dict, output_file: str):
+    """Write the summary as an HTML report."""
+    html = []
+
+    # Start the HTML document
+    html.append("<html><head><title>Net-Prof Summary Report</title>")
+    html.append("<style>")
+    html.append("body { font-family: sans-serif; padding: 2em; }")
+    html.append("table { border-collapse: collapse; margin: 1em 0; width: 100%; }")
+    html.append("th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }")
+    html.append("th { background-color: #eee; }")
+    html.append("</style></head><body>")
+
+    # Total non-zero diffs
+    html.append(f"<h1>Net-Prof Summary</h1>")
+    html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
+
+    # Per-interface non-zero counts
+    html.append("<h3>Non-zero Diffs by Interface</h3>")
+    html.append("<table><tr><th>Interface</th><th>Non-zero Count</th></tr>")
+    for iface, count in summary['non_zero_per_iface'].items():
+        html.append(f"<tr><td>Interface {iface}</td><td>{count} / 1890</td></tr>")
+    html.append("</table>")
+
+    # Top 20 diffs per interface
+    html.append("<h3>Top 20 Diffs per Interface</h3>")
+    for iface, entries in summary['top20_per_iface'].items():
+        html.append(f"<h4>Interface {iface}</h4>")
+        html.append("<table><tr><th>Rank</th><th>Metric ID</th><th>Metric Name</th><th>Diff</th></tr>")
+        for rank, entry in enumerate(entries, start=1):
+            html.append(f"<tr><td>{rank}</td><td>{entry['metric_id']}</td><td>{entry['metric_name']}</td><td>{entry['diff']}</td></tr>")
+        html.append("</table>")
+
+    # Important metrics
+    html.append("<h3>Important Metrics</h3>")
+    html.append("<table><tr><th>Metric ID</th><th>Metric Name</th>" + "".join(f"<th>Iface {i}</th>" for i in range(1,9)) + "</tr>")
+    for mid, data in summary['important_metrics'].items():
+        html.append(f"<tr><td>{mid}</td><td>{data['metric_name']}</td>")
+        for i in range(1, 9):
+            html.append(f"<td>{data['diffs'].get(i, 0)}</td>")
+        html.append("</tr>")
+    html.append("</table>")
+
+    # Close the HTML document
+    html.append("</body></html>")
+
+    # Write to file
+    with open(output_file, 'w') as f:
+        f.write('\n'.join(html))
+
+    print(f"HTML report saved to: {output_file}")

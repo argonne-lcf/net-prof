@@ -40,6 +40,8 @@ Eventhough we have cxi0 as default, we can loop through and find all available c
 
 ![Alt text](docs/image1.png)
 ![Alt text](docs/image2.png)
+![Alt text](docs/net_prof_iface_chart.png)
+![Alt text](docs/net_prof_sum_html.png)
 
 
 
