@@ -14,13 +14,13 @@ pip install net-prof
 ```
 import net-prof
 
-before_counters = net-prof.collect(metrics_location="/sys/class/cxi/cxi0/device/telemetry"" [optional])
+before_counters = net-prof.collect(metrics_location="/sys/class/cxi/cxi0/device/telemetry" [optional])
 dist.all_reduce(x, op=dist.ReduceOp.SUM)  
 after_counters=net-prof.collect()
 
-print(net-prof.summarize())
-net-prof.dump_full(outfile=out.txt)
-net-prof.visualize(outfile=report.html)
+print(net-prof.summarize(after_counters, before_counters))
+net-prof.dump_full(after_counters, before_counters, outfile=out.txt)
+net-prof.visualize(after_counters, before_counters, outfile=report.html)
 ```
 
 ```
@@ -30,7 +30,7 @@ before_counters = net-prof.collect(metrics_location="/sys/class/cxi/cxi0/device/
 os.execute('ping google.com')
 after_counters=net-prof.collect()
 
-print(net-prof.summarize())
+print(net-prof.summarize(after_counters, before_counters))
 ```
 
 Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8]

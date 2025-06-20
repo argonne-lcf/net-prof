@@ -4,7 +4,9 @@ import sys
 import os
 # import subprocess
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'))) 
+# lets you use: "from net_prof import summarize, dump" even though net_prof isn't installed as a package.
+# remove after: pip install -e .
 
 from net_prof import summarize, dump # , dump_report
 

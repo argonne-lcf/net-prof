@@ -7,6 +7,7 @@
 # Zero vs non-zero count metrics
 #dump(summary: dict) → Neatly prints summary to terminal.
 
+import glob
 import os
 from typing import Dict, List
 
@@ -25,7 +26,29 @@ def parse_counter(raw: str) -> int:
 
 def collect(output_file: str):
     """Collect a snapshot of counters and write to file (not currently implemented)."""
-    raise NotImplementedError("collect() is not currently implemented. Use pre-collected dump files.")
+    """
+    # Path to the directory containing the files
+    telemetry_dir = "/sys/class/cxi/cxi0/device/telemetry"
+
+    # Match all relevant files (exclude ALL-in-binary or any other you want)
+    files = glob.glob(os.path.join(telemetry_dir, "tou_ct_cmd_counts_*"))
+
+    # Sort files by the trailing number
+    files_sorted = sorted(files, key=lambda f: int(f.split('_')[-1]))
+
+    # Read all 14 files
+    cmd_counts = {}
+    for filepath in files_sorted[:14]:
+        with open(filepath, 'r') as f:
+            content = f.read()
+            cmd_counts[os.path.basename(filepath)] = content
+
+    # Print or process
+    for fname, data in cmd_counts.items():
+        print(f"{fname}:")
+        print(data)
+        print("---")
+    """
 
 def summarize(before_path: str, after_path: str) -> Dict:
     """Load metrics.txt and two dump files, compute differences, return summary dict."""
