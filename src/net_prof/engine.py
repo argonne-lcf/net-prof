@@ -31,30 +31,89 @@ def parse_counter(raw: str) -> int:
     """Given 'value@timestamp', return the integer counter before the @."""
     return int(raw.split('@')[0])
 
-def load_grouping_rules(rules_path: str) -> list[dict]:
-    """Not implemented yet. Load grouping rules from CSV and compile regex patterns."""
+def load_grouping_rules(rules_path: str) -> List[Dict]:
+    """Load grouping rules from a CSV into compiled regex patterns."""
+    rules: List[Dict] = []
+    with open(rules_path, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)  # comma-delimited
+        for row in reader:
+            pattern = row.get('Regex')
+            if not pattern:
+                continue
+            rules.append({
+                'regex': re.compile(pattern, re.IGNORECASE),
+                'group': row.get('Counter_Group', 'UNGROUPED'),
+                'description': row.get('Counter_Description', 'No description')
+            })
+    return rules
 
 def match_group_and_description(counter_name: str, rules: list[dict]) -> tuple[str, str]:
     """Not implemented yet. Return (group, description) for the given counter name based on regex rules."""
+    for rule in rules:
+        if rule['regex'].match(counter_name):
+            return rule['group'], rule['description']
+    return "UNGROUPED", "No description"
 
-def collect(input_path: str, output_file: str):
-    """Collect a snapshot of counters and write to file (not currently implemented)."""
-    
-    # example: collect("/sys/class/cxi/cxi0/device/telemetry", "before.json")
-    """
-    output example: (using json now, alot easier for storing description, group, etc)
-        [
-            {
-                "interface": 1,
-                "counter_name": "HNI_PKTS_RECV_BY_TC_0",
-                "value": 10234,
-                "timestamp": 1746204054994093646,
-                "group": "CxiPerfStats",
-                "description": "Number of packets received in traffic class <n>..."
-            },
-            ...
-        ]    
-    """
+def collect(input_file: str, output_file: str):
+    """Collect counters from telemetry directory and save structured JSON."""
+    # Path to grouping rules
+    rules_path = os.path.join(os.path.dirname(__file__), 'data', 'grouping_rules.csv')
+
+    if not os.path.isdir(input_file):
+        raise ValueError(f"Telemetry path {input_file} does not exist or is not a directory.")
+
+    # Load grouping rules
+    rules = load_grouping_rules(rules_path)
+
+    # Determine interface id from directory name (e.g., cxi0 -> 1)
+    iface_name = os.path.basename(os.path.normpath(input_file))
+    match = re.search(r"cxi(\d+)", iface_name)
+    interface_id = int(match.group(1)) + 1 if match else 1
+
+    collected: List[Dict] = []
+    files = [f for f in os.listdir(input_file) if os.path.isfile(os.path.join(input_file, f))]
+    print(f"Found {len(files)} files in telemetry directory.")
+
+    for idx, filename in enumerate(files, start=1):
+        filepath = os.path.join(input_file, filename)
+        try:
+            raw = open(filepath, 'r').read().strip()
+        except Exception as e:
+            print(f"Skipping {filename}: unable to read file: {e}")
+            continue
+
+        if '@' not in raw:
+            print(f"Skipping {filename}: no '@' delimiter in '{raw}'")
+            continue
+
+        value_str, timestamp_str = raw.split('@', 1)
+        try:
+            value = int(value_str)
+        except ValueError:
+            print(f"Skipping {filename}: invalid integer value '{value_str}'")
+            continue
+        try:
+            timestamp = float(timestamp_str)
+        except ValueError:
+            print(f"Skipping {filename}: invalid timestamp '{timestamp_str}'")
+            timestamp = None
+
+        group, description = match_group_and_description(filename, rules)
+        collected.append({
+            'id': idx,
+            'interface': interface_id,
+            'counter_name': filename,
+            'value': value,
+            'timestamp': timestamp,
+            'group': group,
+            'description': description
+        })
+
+    # Write JSON
+    with open(output_file, 'w') as out:
+        json.dump(collected, out, indent=2)
+    print(f"Collected {len(collected)} counters → {output_file}")
+
 
 def summarize(before_path: str, after_path: str) -> Dict:
     """Load metrics.txt and two dump files, compute differences, return summary dict."""
