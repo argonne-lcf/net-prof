@@ -9,6 +9,9 @@
 
 import glob
 import os
+import json
+import re
+import csv
 from typing import Dict, List
 from .visualize import (
     iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
@@ -28,30 +31,29 @@ def parse_counter(raw: str) -> int:
     """Given 'value@timestamp', return the integer counter before the @."""
     return int(raw.split('@')[0])
 
-def collect(output_file: str):
+def load_grouping_rules(rules_path: str) -> list[dict]:
+    """Not implemented yet. Load grouping rules from CSV and compile regex patterns."""
+
+def match_group_and_description(counter_name: str, rules: list[dict]) -> tuple[str, str]:
+    """Not implemented yet. Return (group, description) for the given counter name based on regex rules."""
+
+def collect(input_path: str, output_file: str):
     """Collect a snapshot of counters and write to file (not currently implemented)."""
+    
+    # example: collect("/sys/class/cxi/cxi0/device/telemetry", "before.json")
     """
-    # Path to the directory containing the files
-    telemetry_dir = "/sys/class/cxi/cxi0/device/telemetry"
-
-    # Match all relevant files (exclude ALL-in-binary or any other you want)
-    files = glob.glob(os.path.join(telemetry_dir, "tou_ct_cmd_counts_*"))
-
-    # Sort files by the trailing number
-    files_sorted = sorted(files, key=lambda f: int(f.split('_')[-1]))
-
-    # Read all 14 files
-    cmd_counts = {}
-    for filepath in files_sorted[:14]:
-        with open(filepath, 'r') as f:
-            content = f.read()
-            cmd_counts[os.path.basename(filepath)] = content
-
-    # Print or process
-    for fname, data in cmd_counts.items():
-        print(f"{fname}:")
-        print(data)
-        print("---")
+    output example: (using json now, alot easier for storing description, group, etc)
+        [
+            {
+                "interface": 1,
+                "counter_name": "HNI_PKTS_RECV_BY_TC_0",
+                "value": 10234,
+                "timestamp": 1746204054994093646,
+                "group": "CxiPerfStats",
+                "description": "Number of packets received in traffic class <n>..."
+            },
+            ...
+        ]    
     """
 
 def summarize(before_path: str, after_path: str) -> Dict:
