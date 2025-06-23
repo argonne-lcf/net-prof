@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from net_prof import summarize
-from net_prof.visualize import bar_chart, heat_map
+from net_prof.visualize import bar_chart, heat_map, iface1_barchart
 
 # Set paths
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,3 +23,5 @@ summary = summarize(before, after)
 # Display visualizations (instead of saving)
 bar_chart(summary, output_path=None)  # Modified function will detect None and call plt.show()
 heat_map(summary)
+
+iface1_barchart(summary, "iface1_barchart.png")

@@ -63,3 +63,45 @@ def heat_map(summary: Dict):
     fig.colorbar(cax, ax=ax, label='Difference')
     plt.tight_layout()
     plt.show()
+    
+    
+def generate_iface_barchart(summary: Dict, iface: int, output_path: str):
+    """Generate a bar chart for the top 20 diffs for a given interface."""
+    entries = summary['top20_per_iface'].get(iface, [])
+    names = [e['metric_name'] for e in entries]
+    diffs = [e['diff'] for e in entries]
+
+    plt.figure(figsize=(12, 6))
+    plt.barh(names, diffs, color='teal')
+    plt.title(f'Top 20 Diffs - Interface {iface}')
+    plt.xlabel('Difference')
+    plt.ylabel('Metric Name')
+    plt.gca().invert_yaxis()
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+
+def iface1_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 1, output_path)
+
+def iface2_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 2, output_path)
+
+def iface3_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 3, output_path)
+
+def iface4_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 4, output_path)
+
+def iface5_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 5, output_path)
+
+def iface6_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 6, output_path)
+
+def iface7_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 7, output_path)
+
+def iface8_barchart(summary: Dict, output_path: str):
+    generate_iface_barchart(summary, 8, output_path)

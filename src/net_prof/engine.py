@@ -10,6 +10,10 @@
 import glob
 import os
 from typing import Dict, List
+from .visualize import (
+    iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
+    iface5_barchart, iface6_barchart, iface7_barchart, iface8_barchart
+)
 
 def load_lines(path: str) -> List[str]:
     """Read a file and return a list of its lines (no trailing newline)."""
@@ -146,10 +150,24 @@ def dump(summary: Dict):
         
         
 def dump_html(summary: dict, output_file: str):
-    """Write the summary as an HTML report."""
+    """Write the summary as an HTML report with charts."""
     html = []
 
-    # Start the HTML document
+    # Prepare output path
+    charts_dir = os.path.join(os.path.dirname(output_file), "charts")
+    os.makedirs(charts_dir, exist_ok=True)
+
+    # Generate chart images
+    iface1_barchart(summary, os.path.join(charts_dir, "iface1.png"))
+    iface2_barchart(summary, os.path.join(charts_dir, "iface2.png"))
+    iface3_barchart(summary, os.path.join(charts_dir, "iface3.png"))
+    iface4_barchart(summary, os.path.join(charts_dir, "iface4.png"))
+    iface5_barchart(summary, os.path.join(charts_dir, "iface5.png"))
+    iface6_barchart(summary, os.path.join(charts_dir, "iface6.png"))
+    iface7_barchart(summary, os.path.join(charts_dir, "iface7.png"))
+    iface8_barchart(summary, os.path.join(charts_dir, "iface8.png"))
+
+    # Start HTML
     html.append("<html><head><title>Net-Prof Summary Report</title>")
     html.append("<style>")
     html.append("body { font-family: sans-serif; padding: 2em; }")
@@ -158,19 +176,25 @@ def dump_html(summary: dict, output_file: str):
     html.append("th { background-color: #eee; }")
     html.append("</style></head><body>")
 
-    # Total non-zero diffs
+    # Title and totals
     html.append(f"<h1>Net-Prof Summary</h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
 
-    # Per-interface non-zero counts
+    # Charts
+    html.append("<h2>Top 20 Diffs by Interface</h2>")
+    for i in range(1, 9):
+        html.append(f"<h3>Interface {i}</h3>")
+        html.append(f"<img src='charts/iface{i}.png' style='width:100%; max-width:800px;'><br><br>")
+
+    # Per-interface counts
     html.append("<h3>Non-zero Diffs by Interface</h3>")
     html.append("<table><tr><th>Interface</th><th>Non-zero Count</th></tr>")
     for iface, count in summary['non_zero_per_iface'].items():
         html.append(f"<tr><td>Interface {iface}</td><td>{count} / 1890</td></tr>")
     html.append("</table>")
 
-    # Top 20 diffs per interface
-    html.append("<h3>Top 20 Diffs per Interface</h3>")
+    # Top 20 per iface
+    html.append("<h3>Top 20 Diffs per Interface (Raw Table)</h3>")
     for iface, entries in summary['top20_per_iface'].items():
         html.append(f"<h4>Interface {iface}</h4>")
         html.append("<table><tr><th>Rank</th><th>Metric ID</th><th>Metric Name</th><th>Diff</th></tr>")
@@ -188,10 +212,9 @@ def dump_html(summary: dict, output_file: str):
         html.append("</tr>")
     html.append("</table>")
 
-    # Close the HTML document
+    # End HTML
     html.append("</body></html>")
 
-    # Write to file
     with open(output_file, 'w') as f:
         f.write('\n'.join(html))
 

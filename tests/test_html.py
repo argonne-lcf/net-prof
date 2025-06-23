@@ -18,4 +18,11 @@ after = os.path.join(project_root, "example", "after.txt")
 metrics = os.path.join(project_root, "src", "net_prof", "data", "metrics.txt")
 
 summary = summarize(before, after)
-dump_html(summary, "report.html")
+
+# Ensure output directory for charts exists within tests/ or project root
+output_html = os.path.join(script_dir, "report.html")  # e.g., tests/report.html
+os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
+
+dump_html(summary, output_html)
+
+print(f"HTML report created at {output_html}")
