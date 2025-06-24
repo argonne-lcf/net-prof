@@ -61,12 +61,13 @@ dump_html(summary, output_html) # outputs summary to html
 Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8]
 
 ### Features in Devolopment:
+```
 FIX -- Being able to loop through with collect() in the /cxi/ directory -- Right now only one interface can be examined at a time.
 FIX -- Feature isn't set up as a package yet so import won't work.
 FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
 Create a single unified test instead of having a bunch of tests.
 Adding more charts with mpl.
-
+```
 
 ### Profiler Snapshots
 
