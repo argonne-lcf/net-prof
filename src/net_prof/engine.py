@@ -166,7 +166,7 @@ def summarize(before_path: str, after_path: str, metrics_path: str = None) -> Di
     top20_per_iface = {}
     for i in range(1, num_interfaces+1):
         iface_rs = [r for r in results if r['iface']==i]
-        iface_rs.sort(key=lambda r: r['diff'], reverse=True)
+        iface_rs.sort(key=lambda r: abs(r['diff']), reverse=True) # Takes absolute value of diff to avoid the scenario where negative differences go unaccounted for.
         top20_per_iface[i] = iface_rs[:20]
     important_ids = [17,18,22,839,835,869,873,
                      564,565,613,614,

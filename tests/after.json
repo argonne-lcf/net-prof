@@ -8310,7 +8310,7 @@
     "id": 924,
     "interface": 1,
     "counter_name": "atu_cache_evictions",
-    "value": 0,
+    "value": 100000,
     "timestamp": 1750351413.7000983,
     "group": "CxiTranslationUnit",
     "description": "Number of times a tag was evicted from the NIC translation cache to make room for a new tag."
