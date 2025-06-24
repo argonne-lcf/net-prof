@@ -1,4 +1,8 @@
 # test_html.py
+"""
+This test outputs a html file named report.html using a predefined before.txt, after.txt, and metrics.txt.
+"""
+
 
 import sys
 import os

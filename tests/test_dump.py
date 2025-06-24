@@ -1,4 +1,8 @@
 # test_dump.py
+"""
+This test runs dump(), which produces a terminal-based output of summarize(before, after). 
+"""
+
 
 import sys
 import os

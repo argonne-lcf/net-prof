@@ -7,7 +7,8 @@ th { background-color: #eee; }
 </style></head><body>
 <h1>Net-Prof Summary</h1>
 <h2>Total Non-zero Diffs: 1506 / 15120</h2>
-<h2>Top 20 Diffs by Interface</h2>
+<details open>
+<summary><h2>Top 20 Diffs by Interface (Charts)</h2></summary>
 <h3>Interface 1</h3>
 <img src='charts/iface1.png' style='width:100%; max-width:800px;'><br><br>
 <h3>Interface 2</h3>
@@ -24,6 +25,7 @@ th { background-color: #eee; }
 <img src='charts/iface7.png' style='width:100%; max-width:800px;'><br><br>
 <h3>Interface 8</h3>
 <img src='charts/iface8.png' style='width:100%; max-width:800px;'><br><br>
+</details>
 <h3>Non-zero Diffs by Interface</h3>
 <table><tr><th>Interface</th><th>Non-zero Count</th></tr>
 <tr><td>Interface 1</td><td>280 / 1890</td></tr>
@@ -35,6 +37,7 @@ th { background-color: #eee; }
 <tr><td>Interface 7</td><td>177 / 1890</td></tr>
 <tr><td>Interface 8</td><td>215 / 1890</td></tr>
 </table>
+<details>
 <h3>Top 20 Diffs per Interface (Raw Table)</h3>
 <h4>Interface 1</h4>
 <table><tr><th>Rank</th><th>Metric ID</th><th>Metric Name</th><th>Diff</th></tr>
@@ -220,6 +223,7 @@ th { background-color: #eee; }
 <tr><td>19</td><td>1116</td><td>oxe_mcu_meas_35</td><td>153427</td></tr>
 <tr><td>20</td><td>1016</td><td>mb_cmc_axi_rd_requests_1</td><td>152686</td></tr>
 </table>
+</details>
 <h3>Important Metrics</h3>
 <table><tr><th>Metric ID</th><th>Metric Name</th><th>Iface 1</th><th>Iface 2</th><th>Iface 3</th><th>Iface 4</th><th>Iface 5</th><th>Iface 6</th><th>Iface 7</th><th>Iface 8</th></tr>
 <tr><td>17</td><td>atu_cache_evictions</td>
@@ -383,4 +387,41 @@ th { background-color: #eee; }
 <td>0</td>
 </tr>
 </table>
+<h2>Counter Groups Detail</h2>
+<details><summary><strong>CxiPerfStats</strong> — Traffic Congestion Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiErrStats</strong> — Network Error Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiOpCommands</strong> — Operation (Command) Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiOpPackets</strong> — Operation (Packet) Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiDmaEngine</strong> — DMA Engine Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiWritesToHost</strong> — Writes-to-Host Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiMessageMatchingPooled</strong> — Message Matching of Pooled Counters</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiTranslationUnit</strong> — Translation Unit Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiLatencyHist</strong> — Latency Histogram Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiPctReqRespTracking</strong> — PCT Request & Response Tracking Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiLinkReliability</strong> — Link Reliability Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
+<details><summary><strong>CxiCongestion</strong> — Congestion Counter Group</summary>
+<table><tr><th>ID #</th><th>Interface #</th><th>Counter Name</th><th>Value</th><th>Description</th></tr>
+</table></details>
 </body></html>

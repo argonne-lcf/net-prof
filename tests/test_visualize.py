@@ -1,4 +1,7 @@
-# test_visualize
+# test_visualize.py
+"""
+test_visualize.py calls functions from net_prof.visualize for testing.
+"""
 
 import sys
 import os
@@ -20,8 +23,6 @@ after = os.path.join(project_root, "example", "after.txt")
 # Generate summary
 summary = summarize(before, after)
 
-# Display visualizations (instead of saving)
-bar_chart(summary, output_path=None)  # Modified function will detect None and call plt.show()
-heat_map(summary)
-
-iface1_barchart(summary, "iface1_barchart.png")
+bar_chart(summary, output_path=None)  # Modified function will detect None for output_path, won't save the .png and just call plt.show()
+heat_map(summary) # This function will just display (plt.show()) without adding an argument for output_path.
+iface1_barchart(summary, "iface1_barchart.png") # This function will create a barchart named iface1_barchart.png, saving it to dir without. NOTE: I don't use plt.show for this function, thats why it doesn't display as pop-up.

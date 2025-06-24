@@ -1,6 +1,10 @@
 # test_collect.py
-
-# Not fully implemented!
+"""
+This test runs collect(), and prints a few statements that can be useful for debugging, such as:
+If a .json file is created.
+Prints out counters that have a group assignment -- if none are printed, things aren't working correctly.
+Prints out counters that have a non-zero value -- if none are printed, things are either wrong, or maybe you just have dummy data with 0 for everything? ¯\_(ツ)_/¯
+"""
 
 import sys
 import os

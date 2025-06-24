@@ -12,11 +12,12 @@ import os
 import json
 import re
 import csv
-from typing import Dict, List
+from typing import Dict, List, Tuple, Any
 from .visualize import (
     iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
     iface5_barchart, iface6_barchart, iface7_barchart, iface8_barchart
 )
+
 
 def load_lines(path: str) -> List[str]:
     """Read a file and return a list of its lines (no trailing newline)."""
@@ -27,9 +28,11 @@ def parse_metric_name(raw: str) -> str:
     """Return the metric name (last whitespace-separated token)."""
     return raw.strip().split()[-1]
 
+
 def parse_counter(raw: str) -> int:
     """Given 'value@timestamp', return the integer counter before the @."""
     return int(raw.split('@')[0])
+
 
 def load_grouping_rules(rules_path: str) -> List[Dict]:
     """Load grouping rules from a CSV into compiled regex patterns."""
@@ -46,6 +49,7 @@ def load_grouping_rules(rules_path: str) -> List[Dict]:
                 'description': row.get('Counter_Description', 'No description')
             })
     return rules
+
 
 def match_group_and_description(counter_name: str, rules: list[dict]) -> tuple[str, str]:
     """Not implemented yet. Return (group, description) for the given counter name based on regex rules."""
@@ -115,23 +119,40 @@ def collect(input_file: str, output_file: str):
     print(f"Collected {len(collected)} counters → {output_file}")
 
 
-def summarize(before_path: str, after_path: str) -> Dict:
-    """Load metrics.txt and two dump files, compute differences, return summary dict."""
-    metrics = load_lines(os.path.join(os.path.dirname(__file__), "data/metrics.txt"))
-    before = load_lines(before_path)
-    after = load_lines(after_path)
-
+def summarize(before_path: str, after_path: str, metrics_path: str = None) -> Dict[str, Any]:
+    """
+    Load metrics definitions and two counter dumps (txt or json), compute differences,
+    and return a structured summary including collected json data if provided.
+    """
+    if metrics_path is None:
+        metrics_path = os.path.join(os.path.dirname(__file__), 'data', 'metrics.txt')
+    metrics = load_lines(metrics_path)
+    # Detect JSON vs txt dumps
+    is_json = before_path.lower().endswith('.json') and after_path.lower().endswith('.json')
+    if is_json:
+        before_list = json.load(open(before_path))
+        after_list = json.load(open(after_path))
+    else:
+        before = load_lines(before_path)
+        after = load_lines(after_path)
     num_metrics = len(metrics)
     num_interfaces = 8
-
     results = []
     for m_idx, raw_metric in enumerate(metrics):
         metric_id = m_idx + 1
         metric_name = parse_metric_name(raw_metric)
         for iface in range(1, num_interfaces + 1):
-            idx = (iface - 1) * num_metrics + m_idx
-            cnt_before = parse_counter(before[idx])
-            cnt_after = parse_counter(after[idx])
+            if is_json:
+                # lookup by filename match
+                key = metric_name
+                cnt_before = next((e['value'] for e in before_list
+                                   if e['counter_name'].endswith(metric_name) and e['interface']==iface), 0)
+                cnt_after = next((e['value'] for e in after_list
+                                  if e['counter_name'].endswith(metric_name) and e['interface']==iface), 0)
+            else:
+                idx = (iface - 1) * num_metrics + m_idx
+                cnt_before = parse_counter(before[idx])
+                cnt_after = parse_counter(after[idx])
             diff = cnt_after - cnt_before
             results.append({
                 'iface': iface,
@@ -139,19 +160,14 @@ def summarize(before_path: str, after_path: str) -> Dict:
                 'metric_name': metric_name,
                 'diff': diff
             })
-
     total_non_zero = sum(1 for r in results if r['diff'] != 0)
-    non_zero_per_iface = {
-        i: sum(1 for r in results if r['iface'] == i and r['diff'] != 0)
-        for i in range(1, num_interfaces + 1)
-    }
-
+    non_zero_per_iface = {i: sum(1 for r in results if r['iface']==i and r['diff']!=0)
+                          for i in range(1, num_interfaces+1)}
     top20_per_iface = {}
-    for i in range(1, num_interfaces + 1):
-        iface_rs = [r for r in results if r['iface'] == i]
+    for i in range(1, num_interfaces+1):
+        iface_rs = [r for r in results if r['iface']==i]
         iface_rs.sort(key=lambda r: r['diff'], reverse=True)
         top20_per_iface[i] = iface_rs[:20]
-
     important_ids = [17,18,22,839,835,869,873,
                      564,565,613,614,
                      1600,1599,1598,1597,
@@ -161,47 +177,36 @@ def summarize(before_path: str, after_path: str) -> Dict:
         mid = r['metric_id']
         if mid not in important_ids:
             continue
-        pivot.setdefault(mid, { 'metric_name': r['metric_name'], 'diffs': {} })
+        pivot.setdefault(mid, {'metric_name': r['metric_name'], 'diffs': {}})
         pivot[mid]['diffs'][r['iface']] = r['diff']
-
     return {
         'total_non_zero': total_non_zero,
         'non_zero_per_iface': non_zero_per_iface,
         'top20_per_iface': top20_per_iface,
-        'important_metrics': pivot
+        'important_metrics': pivot,
+        'collected': before_list if is_json else []
     }
 
-def dump(summary: Dict):
-    """Nicely print summary to the console."""
-    print(f"\nTotal non-zero diffs: {summary['total_non_zero']}/15120\n")
 
+def dump(summary: Dict[str, Any]):
+    """Nicely print summary to the console."""
+    print(f"\nTotal non-zero diffs: {summary['total_non_zero']}\n")
     print("Non-zero diffs by interface:")
     for iface, count in summary['non_zero_per_iface'].items():
-        print(f"  Interface {iface:<2}: {count}/1890")
-    print("\n")
-
+        print(f"  Interface {iface:<2}: {count}\n")
     for iface, entries in summary['top20_per_iface'].items():
         print(f"Top 20 diffs for Interface {iface}:")
         print(f"{'Rank':<6}{'Metric ID':<12}{'Metric Name':<30}{'Difference':>12}")
-        print('-' * 60)
+        print('-'*60)
         for rank, entry in enumerate(entries, start=1):
-            print(
-                f"{rank:<6}"
-                f"{entry['metric_id']:<12}"
-                f"{entry['metric_name']:<30}"
-                f"{entry['diff']:>12}"
-            )
+            print(f"{rank:<6}{entry['metric_id']:<12}{entry['metric_name']:<30}{entry['diff']:>12}")
         not_shown = summary['non_zero_per_iface'][iface] - len(entries)
         print(f"Total non-zero diffs not shown in Interface {iface}: {not_shown}\n")
-
     print("Important Metrics (diffs by interface):")
     id_w, name_w, iface_w = 15, 40, 15
-    header = (
-        f"{'Metric ID':<{id_w}} {'Metric Name':<{name_w}}"
-        + ''.join(f" {'Iface'+str(i):<{iface_w}}" for i in range(1,9))
-    )
+    header = f"{'Metric ID':<{id_w}} {'Metric Name':<{name_w}}" + ''.join(f" {'Iface'+str(i):<{iface_w}}" for i in range(1,9))
     print(header)
-    print('-' * len(header))
+    print('-'*len(header))
     for mid, data in summary['important_metrics'].items():
         row = f"{mid:<{id_w}} {data['metric_name']:<{name_w}}"
         for i in range(1,9):
@@ -241,11 +246,13 @@ def dump_html(summary: dict, output_file: str):
     html.append(f"<h1>Net-Prof Summary</h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
 
-    # Charts
-    html.append("<h2>Top 20 Diffs by Interface</h2>")
+    # Charts (collapsible)
+    html.append("<details open>")  # add `open` if you want it expanded by default
+    html.append("<summary><h2>Top 20 Diffs by Interface (Charts)</h2></summary>")
     for i in range(1, 9):
         html.append(f"<h3>Interface {i}</h3>")
         html.append(f"<img src='charts/iface{i}.png' style='width:100%; max-width:800px;'><br><br>")
+    html.append("</details>")
 
     # Per-interface counts
     html.append("<h3>Non-zero Diffs by Interface</h3>")
@@ -255,6 +262,8 @@ def dump_html(summary: dict, output_file: str):
     html.append("</table>")
 
     # Top 20 per iface
+    # Raw tables (collapsible)
+    html.append("<details>")
     html.append("<h3>Top 20 Diffs per Interface (Raw Table)</h3>")
     for iface, entries in summary['top20_per_iface'].items():
         html.append(f"<h4>Interface {iface}</h4>")
@@ -262,6 +271,7 @@ def dump_html(summary: dict, output_file: str):
         for rank, entry in enumerate(entries, start=1):
             html.append(f"<tr><td>{rank}</td><td>{entry['metric_id']}</td><td>{entry['metric_name']}</td><td>{entry['diff']}</td></tr>")
         html.append("</table>")
+    html.append("</details>")
 
     # Important metrics
     html.append("<h3>Important Metrics</h3>")
@@ -272,6 +282,53 @@ def dump_html(summary: dict, output_file: str):
             html.append(f"<td>{data['diffs'].get(i, 0)}</td>")
         html.append("</tr>")
     html.append("</table>")
+
+# --- COLLAPSIBLE GROUPS SECTION ---
+    html.append("<h2>Counter Groups Detail</h2>")
+
+    # List of (group_key, human-readable description)
+    groups = [
+        ("CxiPerfStats",           "Traffic Congestion Counter Group"),
+        ("CxiErrStats",            "Network Error Counter Group"),
+        ("CxiOpCommands",          "Operation (Command) Counter Group"),
+        ("CxiOpPackets",           "Operation (Packet) Counter Group"),
+        ("CxiDmaEngine",           "DMA Engine Counter Group"),
+        ("CxiWritesToHost",        "Writes-to-Host Counter Group"),
+        ("CxiMessageMatchingPooled","Message Matching of Pooled Counters"),
+        ("CxiTranslationUnit",     "Translation Unit Counter Group"),
+        ("CxiLatencyHist",         "Latency Histogram Counter Group"),
+        ("CxiPctReqRespTracking",  "PCT Request & Response Tracking Counter Group"),
+        ("CxiLinkReliability",     "Link Reliability Counter Group"),
+        ("CxiCongestion",          "Congestion Counter Group"),
+    ]
+
+    # assume your collect() has populated summary['collected'] as a list of dicts:
+    #   { 'id', 'interface', 'counter_name', 'value', 'timestamp', 'group', 'description' }
+    collected = summary.get("collected", [])
+
+    for key, desc in groups:
+        html.append(f"<details><summary><strong>{key}</strong> — {desc}</summary>")
+        html.append("<table><tr>"
+                    "<th>ID #</th><th>Interface #</th>"
+                    "<th>Counter Name</th><th>Value</th><th>Description</th>"
+                    "</tr>")
+
+        for entry in collected:
+            if entry["group"] == key:
+                # Tooltip on description cell via `title`
+                html.append(
+                    "<tr>"
+                    f"<td>{entry['id']}</td>"
+                    f"<td>{entry['interface']}</td>"
+                    f"<td>{entry['counter_name']}</td>"
+                    f"<td>{entry['value']}</td>"
+                    f"<td title=\"{entry['description']}\">{entry['description']}</td>"
+                    "</tr>"
+                )
+
+        html.append("</table></details>")
+
+    # --- end collapsible groups ---
 
     # End HTML
     html.append("</body></html>")
