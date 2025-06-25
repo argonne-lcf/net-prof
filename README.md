@@ -57,24 +57,15 @@ dump(summary) # outputs summary to terminal
 dump_html(summary, output_html) # outputs summary to html
 ```
 
-Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8]
+Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8] (Not implemented!)
 
 ### Features in Devolopment:
 ```
 FIX -- Being able to loop through with collect() in the /cxi/ directory -- Right now only one interface can be examined at a time.
 FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
+FIX -- before.txt and after.txt (dummy files for testing without using collect()) were not included in pypi package -- /example/ is missing from package -- (low priority)
 ADD -- Create a single unified test instead of having a bunch of tests.
 ADD -- Adding more charts with mpl.
-```
-
-### Changelog:
-```
---- Release 0.1.0 ---
-+ Uploaded to pypi: https://pypi.org/project/net-prof/0.1.0/
-- Removed requirements.txt -- replaced with [dependencies] in .toml
-+ Added [dependencies] to pyproject.toml -- will be auto-installed with 'pip install net-prof'
-+ Changes to README.md
-FIX -- before.txt and after.txt (dummy files for testing without using collect()) were not included in pypi package -- /example/ is missing from package -- low priority doesn't really affect much but I liked having them.
 ```
 
 ### Profiler Snapshots
@@ -85,6 +76,7 @@ FIX -- before.txt and after.txt (dummy files for testing without using collect()
 ![Alt text](docs/net_prof_sum_html.png)
 
 ### References
-
+```
 https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
 https://pypi.org/project/net-prof/0.1.0/
+```
