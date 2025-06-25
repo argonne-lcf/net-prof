@@ -1,9 +1,16 @@
-# __init__.py
+# src/net_prof/__init__.py
 
 from .engine import summarize, collect, dump, dump_html, collect
-# from .__main__ import dump_report
+from .visualize import bar_chart. heat_map, generate_iface_barchart
 
-__all__ = ["summarize", "collect", "dump, dump_html, collect"]
+__all__ = [
+    "summarize",
+    "collect",
+    "dump",
+    "dump_html",
+    "collect",
+    "bar_chart",
+    "heat_map",
+    "generate_iface_barchart"
+]
 
-# commented out of __all__ for now
-# , "dump_report
