@@ -1,3 +1,17 @@
+Metadata-Version: 2.4
+Name: net-prof
+Version: 0.1.0
+Summary: My cool package
+Author-email: Anthony Cardia <acardia@protonmail.com>, Kaushik Velusamy <kaushikvelusamy@gmail.com>
+Project-URL: Homepage, https://github.com/argonne-lcf/net-prof
+Keywords: network,profiler,cxi,cassini
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+
 # net-prof
 
 Net-prof is a network profiler aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events.
@@ -5,6 +19,7 @@ Net-prof is a network profiler aimed to profile the HPE Cray Cassini Network Int
 ### To Install
 
 ```
+pip install -r requirements.txt
 pip install net-prof
 ```
 
@@ -62,19 +77,10 @@ Eventhough we have cxi0 as default, we can loop through and find all available c
 ### Features in Devolopment:
 ```
 FIX -- Being able to loop through with collect() in the /cxi/ directory -- Right now only one interface can be examined at a time.
+FIX -- Feature isn't set up as a package yet so import won't work.
 FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
-ADD -- Create a single unified test instead of having a bunch of tests.
-ADD -- Adding more charts with mpl.
-```
-
-### Changelog:
-```
---- Release 0.1.0 ---
-+ Uploaded to pypi: https://pypi.org/project/net-prof/0.1.0/
-- Removed requirements.txt -- replaced with [dependencies] in .toml
-+ Added [dependencies] to pyproject.toml -- will be auto-installed with 'pip install net-prof'
-+ Changes to README.md
-FIX -- before.txt and after.txt (dummy files for testing without using collect()) were not included in pypi package -- /example/ is missing from package -- low priority doesn't really affect much but I liked having them.
+Create a single unified test instead of having a bunch of tests.
+Adding more charts with mpl.
 ```
 
 ### Profiler Snapshots
@@ -84,7 +90,8 @@ FIX -- before.txt and after.txt (dummy files for testing without using collect()
 ![Alt text](docs/net_prof_iface_chart.png)
 ![Alt text](docs/net_prof_sum_html.png)
 
+
+
 ### References
 
 https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
-https://pypi.org/project/net-prof/0.1.0/
