@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: net-prof
-Version: 0.1.0
+Version: 0.1.1
 Summary: My cool package
 Author-email: Anthony Cardia <acardia@protonmail.com>, Kaushik Velusamy <kaushikvelusamy@gmail.com>
 Project-URL: Homepage, https://github.com/argonne-lcf/net-prof
@@ -19,7 +19,6 @@ Net-prof is a network profiler aimed to profile the HPE Cray Cassini Network Int
 ### To Install
 
 ```
-pip install -r requirements.txt
 pip install net-prof
 ```
 
@@ -72,15 +71,15 @@ dump(summary) # outputs summary to terminal
 dump_html(summary, output_html) # outputs summary to html
 ```
 
-Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8]
+Eventhough we have cxi0 as default, we can loop through and find all available cxi's from [0-8] (Not implemented!)
 
 ### Features in Devolopment:
 ```
 FIX -- Being able to loop through with collect() in the /cxi/ directory -- Right now only one interface can be examined at a time.
-FIX -- Feature isn't set up as a package yet so import won't work.
 FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
-Create a single unified test instead of having a bunch of tests.
-Adding more charts with mpl.
+FIX -- before.txt and after.txt (dummy files for testing without using collect()) were not included in pypi package -- /example/ is missing from package -- (low priority)
+ADD -- Create a single unified test instead of having a bunch of tests.
+ADD -- Adding more charts with mpl.
 ```
 
 ### Profiler Snapshots
@@ -90,8 +89,8 @@ Adding more charts with mpl.
 ![Alt text](docs/net_prof_iface_chart.png)
 ![Alt text](docs/net_prof_sum_html.png)
 
-
-
 ### References
-
+```
 https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
+https://pypi.org/project/net-prof/0.1.0/
+```

@@ -1,7 +1,4 @@
-# test_html_2.py
-"""
-This test builds upon test_html.py, and instead of using a predetermined before/after.txt test_html_2.py uses collect() to store before and after as .json files, storing the results to report_2.html.
-"""
+# test_iface_all.py
 
 import sys
 import os
@@ -15,9 +12,9 @@ from net_prof import summarize, dump, dump_html, collect # , dump_report
 # Define where this script lives so we can anchor output paths
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json")) # DO NOT DO THIS (mismatched interface) This is just a testing
-# Inbetween these two functions call something like os.execute('ping google.com')
-collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "after.json"))
+collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "before.json"))
+
+collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "after.json"))
 
 before = os.path.join(script_dir, "before.json")
 after = os.path.join(script_dir, "after.json")
@@ -25,7 +22,7 @@ after = os.path.join(script_dir, "after.json")
 summary = summarize(before, after)
 
 # Ensure output directory for charts exists within tests/ or project root
-output_html = os.path.join(script_dir, "report_2.html")  # e.g., tests/report.html
+output_html = os.path.join(script_dir, "report_all.html")  # e.g., tests/report.html
 os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
 
 dump_html(summary, output_html)

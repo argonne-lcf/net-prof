@@ -58,80 +58,65 @@ def match_group_and_description(counter_name: str, rules: list[dict]) -> tuple[s
             return rule['group'], rule['description']
     return "UNGROUPED", "No description"
 
-
-def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[str, Any]]:
-    """
-    Read a single /…/cxiX/device/telemetry directory and return a list
-    of counter dicts for that one interface.
-    """
+def collect(input_file: str, output_file: str):
+    """Collect counters from telemetry directory and save structured JSON."""
+    # Path to grouping rules
     rules_path = os.path.join(os.path.dirname(__file__), 'data', 'grouping_rules.csv')
+
+    if not os.path.isdir(input_file):
+        raise ValueError(f"Telemetry path {input_file} does not exist or is not a directory.")
+
+    # Load grouping rules
     rules = load_grouping_rules(rules_path)
 
-    collected: List[Dict[str, Any]] = []
-    files = sorted(f for f in os.listdir(telemetry_dir)
-                   if os.path.isfile(os.path.join(telemetry_dir, f)))
-    print(f"  [iface {interface_id}] Found {len(files)} files")
+    # Determine interface id from directory name (e.g., cxi0 -> 1)
+    iface_name = os.path.basename(os.path.normpath(input_file))
+    match = re.search(r"cxi(\d+)", iface_name)
+    interface_id = int(match.group(1)) + 1 if match else 1
+
+    collected: List[Dict] = []
+    files = [f for f in os.listdir(input_file) if os.path.isfile(os.path.join(input_file, f))]
+    print(f"Found {len(files)} files in telemetry directory.")
 
     for idx, filename in enumerate(files, start=1):
-        filepath = os.path.join(telemetry_dir, filename)
-        raw = open(filepath, 'r').read().strip()
-        if '@' not in raw:
+        filepath = os.path.join(input_file, filename)
+        try:
+            raw = open(filepath, 'r').read().strip()
+        except Exception as e:
+            print(f"Skipping {filename}: unable to read file: {e}")
             continue
+
+        if '@' not in raw:
+            print(f"Skipping {filename}: no '@' delimiter in '{raw}'")
+            continue
+
         value_str, timestamp_str = raw.split('@', 1)
         try:
             value = int(value_str)
         except ValueError:
+            print(f"Skipping {filename}: invalid integer value '{value_str}'")
             continue
         try:
             timestamp = float(timestamp_str)
         except ValueError:
+            print(f"Skipping {filename}: invalid timestamp '{timestamp_str}'")
             timestamp = None
 
         group, description = match_group_and_description(filename, rules)
         collected.append({
-            'id':            idx,
-            'interface':     interface_id,
-            'counter_name':  filename,
-            'value':         value,
-            'timestamp':     timestamp,
-            'group':         group,
-            'description':   description
+            'id': idx,
+            'interface': interface_id,
+            'counter_name': filename,
+            'value': value,
+            'timestamp': timestamp,
+            'group': group,
+            'description': description
         })
 
-    return collected
-
-
-def collect(input_path: str, output_file: str):
-    """
-    Collect counters from either a single telemetry dir or the entire /sys/class/cxi/ tree.
-    Writes a merged JSON list into output_file.
-    """
-    all_entries: List[Dict[str, Any]] = []
-
-    # Case A: user passed in a telemetry directory directly
-    if os.path.isdir(input_path) and os.path.basename(input_path) == 'telemetry':
-        # extract interface from path: .../cxiX/device/telemetry
-        iface_dir = os.path.basename(os.path.dirname(os.path.dirname(input_path)))
-        match = re.match(r'cxi(\d+)', iface_dir)
-        iface_id = int(match.group(1)) + 1 if match else 1
-        print(f"Collecting interface {iface_id} from {input_path}")
-        all_entries = _collect_one_interface(input_path, iface_id)
-
-    # Case B: user passed in the parent cxi directory
-    else:
-        print(f"Scanning for telemetry under {input_path}")
-        for entry in sorted(os.listdir(input_path)):
-            if re.fullmatch(r'cxi\d+', entry):
-                telemetry_dir = os.path.join(input_path, entry, 'device', 'telemetry')
-                if os.path.isdir(telemetry_dir):
-                    iface_id = int(entry.replace('cxi', '')) + 1
-                    print(f"Collecting interface {iface_id} from {telemetry_dir}")
-                    all_entries.extend(_collect_one_interface(telemetry_dir, iface_id))
-
-    # Write merged JSON
+    # Write JSON
     with open(output_file, 'w') as out:
-        json.dump(all_entries, out, indent=2)
-    print(f"Collected {len(all_entries)} counters → {output_file}")
+        json.dump(collected, out, indent=2)
+    print(f"Collected {len(collected)} counters → {output_file}")
 
 
 def summarize(before_path: str, after_path: str, metrics_path: str = None) -> Dict[str, Any]:
