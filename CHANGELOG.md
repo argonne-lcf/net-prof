@@ -1,5 +1,15 @@
 # Changelog:
 
+## [0.1.3] - 
+### Added
+- Added timestamp_ISO_8601 to JSON file for human readable time.
+- Added new validation for collect(), adding these error messages:
+    - Path {input_path!r} is neither a telemetry directory nor a parent of cxi* interfaces.
+    - No valid cxi*/device/telemetry subfolders found under {input_path!r}
+    - Warning: {telemetry_dir!r} is empty, skipping. 
+    - Telemetry directory {input_path!r} contains no files.
+    - Path {input_path!r} does not exist or is not a directory.
+
 ## [0.1.2] - 06-26-2025
 ### Added
 - Multi-interface profiling

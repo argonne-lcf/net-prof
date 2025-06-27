@@ -15,7 +15,7 @@ from net_prof import summarize, dump, dump_html, collect # , dump_report
 # Define where this script lives so we can anchor output paths
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json")) # DO NOT DO THIS (mismatched interface) This is just a testing
+collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json"))
 # Inbetween these two functions call something like os.execute('ping google.com')
 collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "after.json"))
 

@@ -17,6 +17,7 @@ from .visualize import (
     iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
     iface5_barchart, iface6_barchart, iface7_barchart, iface8_barchart
 )
+from datetime import datetime, timezone
 
 
 def load_lines(path: str) -> List[str]:
@@ -86,6 +87,13 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
             timestamp = float(timestamp_str)
         except ValueError:
             timestamp = None
+            
+        # convert to a human-readable ISO timestamp in UTC
+        human_ts = (
+        datetime.fromtimestamp(timestamp, timezone.utc)
+        .isoformat()
+        if timestamp is not None else None
+        )
 
         group, description = match_group_and_description(filename, rules)
         collected.append({
@@ -94,6 +102,7 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
             'counter_name':  filename,
             'value':         value,
             'timestamp':     timestamp,
+            'timestamp_ISO_8601': human_ts,
             'group':         group,
             'description':   description
         })
@@ -105,33 +114,65 @@ def collect(input_path: str, output_file: str):
     """
     Collect counters from either a single telemetry dir or the entire /sys/class/cxi/ tree.
     Writes a merged JSON list into output_file.
+    Raises ValueError on invalid input.
     """
+    # 1) Normalize and verify the base path exists
+    input_path = os.path.normpath(input_path)
+    if not os.path.isdir(input_path):
+        raise ValueError(f"Path {input_path!r} does not exist or is not a directory.")
+
     all_entries: List[Dict[str, Any]] = []
 
-    # Case A: user passed in a telemetry directory directly
-    if os.path.isdir(input_path) and os.path.basename(input_path) == 'telemetry':
-        # extract interface from path: .../cxiX/device/telemetry
-        iface_dir = os.path.basename(os.path.dirname(os.path.dirname(input_path)))
-        match = re.match(r'cxi(\d+)', iface_dir)
-        iface_id = int(match.group(1)) + 1 if match else 1
-        print(f"Collecting interface {iface_id} from {input_path}")
-        all_entries = _collect_one_interface(input_path, iface_id)
+    basename      = os.path.basename(input_path)
+    parent        = os.path.basename(os.path.dirname(input_path))
+    grandparent   = os.path.basename(os.path.dirname(os.path.dirname(input_path)))
 
-    # Case B: user passed in the parent cxi directory
-    else:
+    # 2A) Single-interface mode: basename is “telemetry” and grandparent is “cxi<digit>”
+    if basename == "telemetry" and re.match(r"cxi\d+", grandparent):
+        # sanity check: directory not empty
+        files = [f for f in os.listdir(input_path)
+                 if os.path.isfile(os.path.join(input_path, f))]
+        if not files:
+            raise ValueError(f"Telemetry directory {input_path!r} contains no files.")
+        
+        iface_num = int(grandparent.replace("cxi", "")) + 1
+        print(f"Collecting interface {iface_num} from {input_path}")
+        all_entries = _collect_one_interface(input_path, iface_num)
+
+    # 2B) Multi-interface mode: parent of cxi* subdirs
+    elif os.path.isdir(input_path) and any(re.fullmatch(r"cxi\d+", d) for d in os.listdir(input_path)):
         print(f"Scanning for telemetry under {input_path}")
+        found_any = False
         for entry in sorted(os.listdir(input_path)):
-            if re.fullmatch(r'cxi\d+', entry):
-                telemetry_dir = os.path.join(input_path, entry, 'device', 'telemetry')
+            if re.fullmatch(r"cxi\d+", entry):
+                telemetry_dir = os.path.join(input_path, entry, "device", "telemetry")
                 if os.path.isdir(telemetry_dir):
-                    iface_id = int(entry.replace('cxi', '')) + 1
-                    print(f"Collecting interface {iface_id} from {telemetry_dir}")
-                    all_entries.extend(_collect_one_interface(telemetry_dir, iface_id))
+                    # sanity check each telemetry dir
+                    files = [f for f in os.listdir(telemetry_dir)
+                             if os.path.isfile(os.path.join(telemetry_dir, f))]
+                    if not files:
+                        print(f"  Warning: {telemetry_dir!r} is empty, skipping.")
+                        continue
+                    iface_num = int(entry.replace("cxi", "")) + 1
+                    print(f"Collecting interface {iface_num} from {telemetry_dir}")
+                    all_entries.extend(_collect_one_interface(telemetry_dir, iface_num))
+                    found_any = True
+        if not found_any:
+            raise ValueError(f"No valid cxi*/device/telemetry subfolders found under {input_path!r}")
 
-    # Write merged JSON
-    with open(output_file, 'w') as out:
+    else:
+        # Neither telemetry nor parent-of-cxi*, bail out
+        raise ValueError(
+            f"Path {input_path!r} is neither a telemetry directory "
+            "nor a parent of cxi* interfaces."
+        )
+
+    # 3) Write merged JSON
+    with open(output_file, "w") as out:
         json.dump(all_entries, out, indent=2)
+
     print(f"Collected {len(all_entries)} counters → {output_file}")
+
 
 
 def summarize(before_path: str, after_path: str, metrics_path: str = None) -> Dict[str, Any]:
