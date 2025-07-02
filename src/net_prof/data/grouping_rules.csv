@@ -21,15 +21,15 @@ CxiErrStats,^PCT_TRS_RSP_NACK_DROPS$,Number of NACKs dropped. Retry handler is i
 CxiErrStats,^HNI_PCS_UNCORRECTED_CW$,Number of uncorrected code words received on the switch to NIC link. High rates (multiple errors per second) indicate a poor quality link.
 CxiErrStats,^HNI_LLR_TX_REPLAY_EVENT$,Number of LLR replays. High rates (multiple per second) indicate that the LLR
 CxiErrStats,^HNI_LLR_RX_REPLAY_EVENT$,mechanism is providing protection on a poor quality link.
-CxiOpCommands,^CQ_DMA_CMD_COUNTS$,"Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
-CxiOpCommands,^CQ_CQ_CMD_COUNTS$,Both CQ commands (FENCE and LCID) and target commands:
-CxiOpCommands,^CQ_NUM_DMA_CMDS$,Number of DMA commands.
-CxiOpCommands,^CQ_NUM_IDC_CMDS$,Number of immediate data commands.
+CxiOpCommands,^CQ_DMA_CMD_COUNTS_\d+$,"Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
+CxiOpCommands,^CQ_CQ_CMD_COUNTS_\d+$,Both CQ commands (FENCE and LCID) and target commands:
+CxiOpCommands,^CQ_NUM_DMA_CMDS_\d+$,Number of DMA commands.
+CxiOpCommands,^CQ_NUM_IDC_CMDS_\d+$,Number of immediate data commands.
 CxiOpPackets,^HNI_TX_OK_\d+_to_\d+$,"Number of packets sent in each of 12 size bins: - Small packets 27, 35, 64 bytes - 65-128, 256-511, 512-1023, 1024-2047, 2048-4095, 4096-8191, 8192-Max"
 CxiOpPackets,^HNI_RX_OK_\d+_to_\d+$,Number of packets received in each of 12 size bins.
-CxiOpPackets,^HNI_PKTS_SENT_BY_TC$,Number of packets sent in each traffic class; default classes or 0 and 1.
-CxiOpPackets,^HNI_PKTS_RECV_BY_TC$,Number of packets received in each traffic class; default classes or 0 and 1.
-CxiDmaEngine,^OXE_MCU_MEAS$,Number of flits sent by each MCU (configurable to count packets or messages).
+CxiOpPackets,^HNI_PKTS_SENT_BY_TC_\d+$,Number of packets sent in each traffic class; default classes or 0 and 1.
+CxiOpPackets,^HNI_PKTS_RECV_BY_TC_\d+$,Number of packets received in each traffic class; default classes or 0 and 1.
+CxiDmaEngine,^OXE_MCU_MEAS_\d+$,Number of flits sent by each MCU (configurable to count packets or messages).
 CxiDmaEngine,^OXE_CHANNEL_IDLE$,Number of cycles in which available bandwidth is not used.
 CxiDmaEngine,^IXE_DISP_DMAWR_REQS$,Number of requests to DMA write controller.
 CxiDmaEngine,^IXE_DMAWR_STALL_P_CDT$,Number of stalls due to no posted credits (cycles).
@@ -40,18 +40,19 @@ CxiWritesToHost,^PARBS_TARB_PI_POSTED_PKTS$,"Number of PCIe packets transferred 
 CxiWritesToHost,^PARBS_TARB_PI_POSTED_BLOCKED_CNT$,and the number of cycles in which this path is blocked. Compute the ratio cycles/pkts. Values of more than a few cycles per packet indicate back pressure from the host. This endpoint is likely to be the cause of congestion.
 CxiWritesToHost,^PARBS_TARB_PI_NON_POSTED_PKTS$,"Number of PCIe packets transferred using the non-posted path (for example, reads),"
 CxiWritesToHost,^PARBS_TARB_PI_NON_POSTED_BLOCKED_CNT$,and the number of cycles in which this path is blocked. Compute the ratio cycles/pkts. Values of more than a few cycles per packet indicate per host performance (high read latencies). This endpoint is likely to be injecting at a low rate.
-CxiMessageMatchingPooled,^LPE_NET_MATCH_REQUESTS$,Number of requests matched.
-CxiMessageMatchingPooled,^LPE_NET_MATCH_PRIORITY$,Number of messages matched on the priority list (receive was posted before the message arrived). Four counters of which 0 is the default. These messages incur lower cost because data is written directly to the user buffer.
+CxiMessageMatchingPooled,^LPE_NET_MATCH_REQUESTS_\d+$,Number of requests matched.
+CxiMessageMatchingPooled,^LPE_NET_MATCH_PRIORITY_\d+$,Number of messages matched on the priority list (receive was posted before the message arrived). Four counters of which 0 is the default. These messages incur lower cost because data is written directly to the user buffer.
 CxiMessageMatchingPooled,^LPE_NET_MATCH_OVERFLOW_\d+$,Number of messages where payload data was delivered to a buffer on the overflow list because there was no match on the priority list. Four counters of which 0 is the default. These messages incur higher cost because data must be copied from the overflow buffer. Compute the ratio priority/(priority + overflow) to determine the proportion of messages for which receives were posted in advance.
-CxiMessageMatchingPooled,^LPE_NET_MATCH_REQUEST$,Number of requests matched on request list (software endpoints).
+CxiMessageMatchingPooled,^LPE_NET_MATCH_REQUEST_\d+$,Number of requests matched on request list (software endpoints).
 CxiMessageMatchingPooled,^LPE_APPEND_CMDS$,Number of append commands.
-CxiMessageMatchingPooled,^LPE_SEARCH_NID_ANY$,"Number of wildcard searches using NID_ANY, physical matching."
-CxiMessageMatchingPooled,^LPE_SEARCH_PID_ANY$,"Number of wildcard searches using NID_PID, physical matching."
-CxiMessageMatchingPooled,^LPE_SEARCH_RANK_ANY$,"Number of wildcard searches using RANK_ANY, logical matching."
-CxiMessageMatchingPooled,^LPE_RNDZV_PUTS$,Number of rendezvous puts received.
+CxiMessageMatchingPooled,^LPE_SEARCH_NID_ANY_\d+$,"Number of wildcard searches using NID_ANY, physical matching."
+CxiMessageMatchingPooled,^LPE_SEARCH_PID_ANY_\d+$,"Number of wildcard searches using NID_PID, physical matching."
+CxiMessageMatchingPooled,^LPE_SEARCH_RANK_ANY_\d+$,"Number of wildcard searches using RANK_ANY, logical matching."
+CxiMessageMatchingPooled,^LPE_RNDZV_PUTS_\d+$,Number of rendezvous puts received.
+CxiMessageMatchingPooled,^LPE_RNDZV_PUTS_OFFLOADED_\d+$,Number of rendezvous puts executed by the NIC
 CxiMessageMatchingPooled,^LPE_AMO_CMDS$,Number of non-fetching AMO commands received by LPE.
 CxiMessageMatchingPooled,^LPE_FAMO_CMDS$,Number of fetching AMO commands received by LPE.
-CxiTranslationUnit,^ATU_CACHE_MISS$,Number of cache misses by counter pool.
+CxiTranslationUnit,^ATU_CACHE_MISS_\d+$,Number of cache misses by counter pool.
 CxiTranslationUnit,^ATU_CLIENT_REQ_EE$,"Number of translation requests by client (events, writes, reads)."
 CxiTranslationUnit,^ATU_CLIENT_REQ_IXE$,NO_DESCRIPTION
 CxiTranslationUnit,^ATU_CLIENT_REQ_OXE$,Note that EE is the Event Engine; IXE is the Input Transfer Engine or Writes; and OXE is the Output Transfer Engine or Reads.
@@ -59,11 +60,11 @@ CxiTranslationUnit,^ATU_CACHE_MISS_EE$,"Number of cache misses by client (events
 CxiTranslationUnit,^ATU_CACHE_MISS_IXE$,NO_DESCRIPTION
 CxiTranslationUnit,^ATU_CACHE_MISS_OXE$,NO_DESCRIPTION
 CxiTranslationUnit,^ATU_CACHE_EVICTIONS$,Number of times a tag was evicted from the NIC translation cache to make room for a new tag.
-CxiTranslationUnit,^ATU_CACHE_HIT_BASE_PAGE_SIZE$,Number of cache hits observed on the Base Page Size.
-CxiTranslationUnit,^ATU_CACHE_HIT_DERIVATIVE1_PAGE_SIZE$,Number of cache hits observed on the Derivative 1 Page Size.
-CxiTranslationUnit,^ATU_ATS_TRANS_LATENCY$,ATS translation latency in preconfigured bins.
-CxiLatencyHist,^PCT_HOST_ACCESS_LATENCY$,"Request or response latency histogram, 32 bins."
-CxiLatencyHist,^PCT_REQ_RSP_LATENCY$,"Host access latency histogram, 16 bins."
+CxiTranslationUnit,^ATU_CACHE_HIT_BASE_PAGE_SIZE_\d+$,Number of cache hits observed on the Base Page Size.
+CxiTranslationUnit,^ATU_CACHE_HIT_DERIVATIVE1_PAGE_SIZE_\d+$,Number of cache hits observed on the Derivative 1 Page Size.
+CxiTranslationUnit,^ATU_ATS_TRANS_LATENCY_\d+$,ATS translation latency in preconfigured bins.
+CxiLatencyHist,^PCT_HOST_ACCESS_LATENCY_\d+$,"Request or response latency histogram, 32 bins."
+CxiLatencyHist,^PCT_REQ_RSP_LATENCY_\d+$,"Host access latency histogram, 16 bins."
 CxiPctReqRespTracking,^PCT_REQ_ORDERED$,Number of ordered requests.
 CxiPctReqRespTracking,^PCT_REQ_UNORDERED$,Number of unordered requests.
 CxiPctReqRespTracking,^PCT_RESPONSES_RECEIVED$,Number of responses received (all unordered).
@@ -78,20 +79,6 @@ CxiLinkReliability,^HNI_PCS_UNCORRECTED_CW$,Number of uncorrected codewords.
 CxiLinkReliability,^HNI_LLR_TX_REPLAY_EVENT$,Number of replays transmitted.
 CxiLinkReliability,^HNI_LLR_RX_REPLAY_EVENT$,Number of replays detected.
 CxiCongestion,^CxiWritesToHost$,https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html#cxiwritestohost---cassini-writes-to-host-counters
-CxiCongestion,^HNI_RX_PAUSED_0$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_1$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_2$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_3$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_4$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_5$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_6$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
-CxiCongestion,^HNI_RX_PAUSED_7$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
+CxiCongestion,^HNI_RX_PAUSED_\d+$,"Number of cycles in which the network asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The network asserting pause indicates the application is causing congestion."
 CxiCongestion,^HNI_RX_PAUSED_STD$,Number of cycles in which at least one PCP pause occurred.
-CxiCongestion,^HNI_TX_PAUSED_0$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_1$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_2$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_3$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_4$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_5$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_6$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
-CxiCongestion,^HNI_TX_PAUSED_7$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."
+CxiCongestion,^HNI_TX_PAUSED_\d+$,"Number of cycles in which the NIC asserts pause, per traffic class; default classes for DMA traffic are 0 and 1. The NIC asserting pause indicates that either the rate of writes or the rate of translations is higher than the host can support, and the NIC is applying back-pressure to the network."

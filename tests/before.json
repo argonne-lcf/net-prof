@@ -116,8 +116,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "ATS translation latency in preconfigured bins."
   },
   {
     "id": 13,
@@ -126,8 +126,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "ATS translation latency in preconfigured bins."
   },
   {
     "id": 14,
@@ -136,8 +136,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "ATS translation latency in preconfigured bins."
   },
   {
     "id": 15,
@@ -146,8 +146,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "ATS translation latency in preconfigured bins."
   },
   {
     "id": 16,
@@ -176,8 +176,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Base Page Size."
   },
   {
     "id": 19,
@@ -186,8 +186,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Base Page Size."
   },
   {
     "id": 20,
@@ -196,8 +196,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Base Page Size."
   },
   {
     "id": 21,
@@ -206,8 +206,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Base Page Size."
   },
   {
     "id": 22,
@@ -216,8 +216,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Derivative 1 Page Size."
   },
   {
     "id": 23,
@@ -226,8 +226,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Derivative 1 Page Size."
   },
   {
     "id": 24,
@@ -236,8 +236,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Derivative 1 Page Size."
   },
   {
     "id": 25,
@@ -246,8 +246,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiTranslationUnit",
+    "description": "Number of cache hits observed on the Derivative 1 Page Size."
   },
   {
     "id": 26,
@@ -656,8 +656,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 67,
@@ -666,8 +666,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 68,
@@ -676,8 +676,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 69,
@@ -686,8 +686,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 70,
@@ -696,8 +696,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 71,
@@ -706,8 +706,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 72,
@@ -716,8 +716,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 73,
@@ -726,8 +726,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 74,
@@ -736,8 +736,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 75,
@@ -746,8 +746,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 76,
@@ -756,8 +756,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 77,
@@ -766,8 +766,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 78,
@@ -776,8 +776,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 79,
@@ -786,8 +786,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 80,
@@ -796,8 +796,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 81,
@@ -806,8 +806,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Both CQ commands (FENCE and LCID) and target commands:"
   },
   {
     "id": 82,
@@ -916,8 +916,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 93,
@@ -926,8 +926,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 94,
@@ -936,8 +936,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 95,
@@ -946,8 +946,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 96,
@@ -956,8 +956,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 97,
@@ -966,8 +966,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 98,
@@ -976,8 +976,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 99,
@@ -986,8 +986,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 100,
@@ -996,8 +996,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 101,
@@ -1006,8 +1006,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 102,
@@ -1016,8 +1016,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 103,
@@ -1026,8 +1026,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 104,
@@ -1036,8 +1036,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 105,
@@ -1046,8 +1046,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 106,
@@ -1056,8 +1056,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 107,
@@ -1066,8 +1066,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of commands of each type: - Put, Get, rendezvous, atomics, small message, Ethernet, etc. - Target commands - Triggered operations Excluding the CMD_ETHERNET_TX command, Cassini supports the generation and sending of packets. "
   },
   {
     "id": 108,
@@ -1156,8 +1156,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of DMA commands."
   },
   {
     "id": 117,
@@ -1166,8 +1166,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of DMA commands."
   },
   {
     "id": 118,
@@ -1176,8 +1176,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of DMA commands."
   },
   {
     "id": 119,
@@ -1186,8 +1186,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of DMA commands."
   },
   {
     "id": 120,
@@ -1196,8 +1196,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of immediate data commands."
   },
   {
     "id": 121,
@@ -1206,8 +1206,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of immediate data commands."
   },
   {
     "id": 122,
@@ -1216,8 +1216,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of immediate data commands."
   },
   {
     "id": 123,
@@ -1226,8 +1226,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiOpCommands",
+    "description": "Number of immediate data commands."
   },
   {
     "id": 124,
@@ -8436,8 +8436,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched on request list (software endpoints)."
   },
   {
     "id": 845,
@@ -8446,8 +8446,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched on request list (software endpoints)."
   },
   {
     "id": 846,
@@ -8456,8 +8456,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched on request list (software endpoints)."
   },
   {
     "id": 847,
@@ -8466,8 +8466,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched on request list (software endpoints)."
   },
   {
     "id": 848,
@@ -8476,8 +8476,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched."
   },
   {
     "id": 849,
@@ -8486,8 +8486,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched."
   },
   {
     "id": 850,
@@ -8496,8 +8496,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched."
   },
   {
     "id": 851,
@@ -8506,8 +8506,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of requests matched."
   },
   {
     "id": 852,
@@ -8696,8 +8696,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts received."
   },
   {
     "id": 871,
@@ -8706,8 +8706,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts received."
   },
   {
     "id": 872,
@@ -8716,8 +8716,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts received."
   },
   {
     "id": 873,
@@ -8726,8 +8726,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts received."
   },
   {
     "id": 874,
@@ -8736,8 +8736,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts executed by the NIC"
   },
   {
     "id": 875,
@@ -8746,8 +8746,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts executed by the NIC"
   },
   {
     "id": 876,
@@ -8756,8 +8756,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts executed by the NIC"
   },
   {
     "id": 877,
@@ -8766,8 +8766,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of rendezvous puts executed by the NIC"
   },
   {
     "id": 878,
@@ -8826,8 +8826,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_ANY, physical matching."
   },
   {
     "id": 884,
@@ -8836,8 +8836,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_ANY, physical matching."
   },
   {
     "id": 885,
@@ -8846,8 +8846,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_ANY, physical matching."
   },
   {
     "id": 886,
@@ -8856,8 +8856,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_ANY, physical matching."
   },
   {
     "id": 887,
@@ -8866,8 +8866,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_PID, physical matching."
   },
   {
     "id": 888,
@@ -8876,8 +8876,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_PID, physical matching."
   },
   {
     "id": 889,
@@ -8886,8 +8886,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_PID, physical matching."
   },
   {
     "id": 890,
@@ -8896,8 +8896,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using NID_PID, physical matching."
   },
   {
     "id": 891,
@@ -8906,8 +8906,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using RANK_ANY, logical matching."
   },
   {
     "id": 892,
@@ -8916,8 +8916,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using RANK_ANY, logical matching."
   },
   {
     "id": 893,
@@ -8926,8 +8926,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using RANK_ANY, logical matching."
   },
   {
     "id": 894,
@@ -8936,8 +8936,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiMessageMatchingPooled",
+    "description": "Number of wildcard searches using RANK_ANY, logical matching."
   },
   {
     "id": 895,
@@ -10876,8 +10876,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1089,
@@ -10886,8 +10886,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1090,
@@ -10896,8 +10896,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1091,
@@ -10906,8 +10906,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1092,
@@ -10916,8 +10916,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1093,
@@ -10926,8 +10926,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1094,
@@ -10936,8 +10936,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1095,
@@ -10946,8 +10946,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1096,
@@ -10956,8 +10956,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1097,
@@ -10966,8 +10966,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1098,
@@ -10976,8 +10976,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1099,
@@ -10986,8 +10986,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1100,
@@ -10996,8 +10996,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1101,
@@ -11006,8 +11006,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1102,
@@ -11016,8 +11016,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1103,
@@ -11026,8 +11026,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1104,
@@ -11036,8 +11036,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1105,
@@ -11046,8 +11046,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1106,
@@ -11056,8 +11056,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1107,
@@ -11066,8 +11066,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1108,
@@ -11076,8 +11076,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1109,
@@ -11086,8 +11086,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1110,
@@ -11096,8 +11096,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1111,
@@ -11106,8 +11106,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1112,
@@ -11116,8 +11116,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1113,
@@ -11126,8 +11126,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1114,
@@ -11136,8 +11136,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1115,
@@ -11146,8 +11146,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1116,
@@ -11156,8 +11156,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1117,
@@ -11166,8 +11166,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1118,
@@ -11176,8 +11176,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1119,
@@ -11186,8 +11186,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1120,
@@ -11196,8 +11196,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1121,
@@ -11206,8 +11206,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1122,
@@ -11216,8 +11216,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1123,
@@ -11226,8 +11226,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1124,
@@ -11236,8 +11236,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1125,
@@ -11246,8 +11246,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1126,
@@ -11256,8 +11256,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1127,
@@ -11266,8 +11266,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1128,
@@ -11276,8 +11276,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1129,
@@ -11286,8 +11286,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1130,
@@ -11296,8 +11296,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1131,
@@ -11306,8 +11306,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1132,
@@ -11316,8 +11316,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1133,
@@ -11326,8 +11326,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1134,
@@ -11336,8 +11336,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1135,
@@ -11346,8 +11346,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1136,
@@ -11356,8 +11356,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1137,
@@ -11366,8 +11366,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1138,
@@ -11376,8 +11376,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1139,
@@ -11386,8 +11386,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1140,
@@ -11396,8 +11396,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1141,
@@ -11406,8 +11406,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1142,
@@ -11416,8 +11416,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1143,
@@ -11426,8 +11426,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1144,
@@ -11436,8 +11436,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1145,
@@ -11446,8 +11446,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1146,
@@ -11456,8 +11456,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1147,
@@ -11466,8 +11466,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1148,
@@ -11476,8 +11476,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1149,
@@ -11486,8 +11486,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1150,
@@ -11496,8 +11496,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1151,
@@ -11506,8 +11506,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1152,
@@ -11516,8 +11516,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1153,
@@ -11526,8 +11526,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1154,
@@ -11536,8 +11536,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1155,
@@ -11546,8 +11546,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1156,
@@ -11556,8 +11556,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1157,
@@ -11566,8 +11566,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1158,
@@ -11576,8 +11576,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1159,
@@ -11586,8 +11586,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1160,
@@ -11596,8 +11596,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1161,
@@ -11606,8 +11606,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1162,
@@ -11616,8 +11616,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1163,
@@ -11626,8 +11626,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1164,
@@ -11636,8 +11636,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1165,
@@ -11646,8 +11646,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1166,
@@ -11656,8 +11656,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1167,
@@ -11666,8 +11666,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1168,
@@ -11676,8 +11676,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1169,
@@ -11686,8 +11686,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1170,
@@ -11696,8 +11696,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1171,
@@ -11706,8 +11706,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1172,
@@ -11716,8 +11716,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1173,
@@ -11726,8 +11726,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1174,
@@ -11736,8 +11736,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1175,
@@ -11746,8 +11746,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1176,
@@ -11756,8 +11756,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1177,
@@ -11766,8 +11766,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1178,
@@ -11776,8 +11776,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1179,
@@ -11786,8 +11786,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1180,
@@ -11796,8 +11796,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1181,
@@ -11806,8 +11806,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1182,
@@ -11816,8 +11816,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1183,
@@ -11826,8 +11826,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiDmaEngine",
+    "description": "Number of flits sent by each MCU (configurable to count packets or messages)."
   },
   {
     "id": 1184,
@@ -16156,8 +16156,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1617,
@@ -16166,8 +16166,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1618,
@@ -16176,8 +16176,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1619,
@@ -16186,8 +16186,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1620,
@@ -16196,8 +16196,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1621,
@@ -16206,8 +16206,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1622,
@@ -16216,8 +16216,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1623,
@@ -16226,8 +16226,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1624,
@@ -16236,8 +16236,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1625,
@@ -16246,8 +16246,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1626,
@@ -16256,8 +16256,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1627,
@@ -16266,8 +16266,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1628,
@@ -16276,8 +16276,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1629,
@@ -16286,8 +16286,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1630,
@@ -16296,8 +16296,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1631,
@@ -16306,8 +16306,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Request or response latency histogram, 32 bins."
   },
   {
     "id": 1632,
@@ -16726,8 +16726,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1674,
@@ -16736,8 +16736,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1675,
@@ -16746,8 +16746,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1676,
@@ -16756,8 +16756,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1677,
@@ -16766,8 +16766,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1678,
@@ -16776,8 +16776,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1679,
@@ -16786,8 +16786,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1680,
@@ -16796,8 +16796,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1681,
@@ -16806,8 +16806,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1682,
@@ -16816,8 +16816,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1683,
@@ -16826,8 +16826,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1684,
@@ -16836,8 +16836,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1685,
@@ -16846,8 +16846,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1686,
@@ -16856,8 +16856,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1687,
@@ -16866,8 +16866,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1688,
@@ -16876,8 +16876,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1689,
@@ -16886,8 +16886,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1690,
@@ -16896,8 +16896,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1691,
@@ -16906,8 +16906,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1692,
@@ -16916,8 +16916,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1693,
@@ -16926,8 +16926,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1694,
@@ -16936,8 +16936,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1695,
@@ -16946,8 +16946,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1696,
@@ -16956,8 +16956,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1697,
@@ -16966,8 +16966,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1698,
@@ -16976,8 +16976,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1699,
@@ -16986,8 +16986,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1700,
@@ -16996,8 +16996,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1701,
@@ -17006,8 +17006,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1702,
@@ -17016,8 +17016,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1703,
@@ -17026,8 +17026,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1704,
@@ -17036,8 +17036,8 @@
     "value": 0,
     "timestamp": 1750351413.7000983,
     "timestamp_ISO_8601": "2025-06-19T16:43:33.700098+00:00",
-    "group": "UNGROUPED",
-    "description": "No description"
+    "group": "CxiLatencyHist",
+    "description": "Host access latency histogram, 16 bins."
   },
   {
     "id": 1705,

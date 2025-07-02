@@ -11,7 +11,7 @@ def convert_counter_name_to_regex(name: str) -> str:
     return f"^{regex_name}$"
 
 def generate_grouping_rules():
-    input_path = "groupings.csv"
+    input_path = "groupings2.csv"
     output_path = "grouping_rules.csv"
 
     with open(input_path, "r", newline='') as infile:

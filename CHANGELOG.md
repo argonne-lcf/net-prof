@@ -1,6 +1,10 @@
 # Changelog:
+## [0.1.4] - 7-2-2025
+### Added
+- Fixed naming conventions within grouping_rules.csv, which was causing counters with numbers to not be tracked into the right group.
+- New bug detected: If a counter belongs to more than one group, it only casts to the first group, and doesn't track the counter within the second group.
 
-## [0.1.3] - 
+## [0.1.3] - 6-26-2025
 ### Added
 - Added timestamp_ISO_8601 to JSON file for human readable time.
 - Added new validation for collect(), adding these error messages:
