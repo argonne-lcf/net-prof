@@ -25,11 +25,8 @@ dump(summary)
 dump_html(summary, output_html)
 ```
 
-## To Use
-
+### Example Utilizing multi-NIC
 ```
-    # Example Utilizing 8 NIC/interfaces!
-
 import sys
 import os
 import net_prof
@@ -50,18 +47,13 @@ os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
 net_prof.dump_html(summary, output_html)
 ```
 
+### Example Utilizing a single NIC/interface (cxi0).
 ```
-    # Example Utilizing a single NIC/interface (cxi0). collect() now supports functionality for single NIC and multi NIC's!
-
 import net_prof
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json"))
-
-# dist.all_reduce(x, op=dist.ReduceOp.SUM) - or - os.execute('ping google.com')
-    # ^ Process that should cause changes to the network runs
-    
-collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "after.json"))
+net_prof.collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json")) 
+net_prof.collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "after.json"))
 
 before = os.path.join(script_dir, "before.json")
 after = os.path.join(script_dir, "after.json")
@@ -69,16 +61,21 @@ after = os.path.join(script_dir, "after.json")
 output_html = os.path.join(script_dir, "report.html")
 os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
 
-summary = summarize(before, after)
-dump(summary)
-dump_html(summary, output_html)
+summary = net_prof.summarize(before, after)
+net_prof.dump(summary)
+net_prof.dump_html(summary, output_html)
 ```
-
-## Features in Devolopment:
+### Test used by Aurora:
 ```
-FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
-ADD -- Create a single unified test instead of having a bunch of tests.
-ADD -- Adding more charts with mpl.
+import os
+import net_prof
+target_host = "x4306c7s2b0n0.hostmgmt2306.cm.aurora.alcf.anl.gov"
+net_prof.collect("/sys/class/cxi/","/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/before.json")
+os.system(f"ping -c 4 {target_host}") 
+net_prof.collect("/sys/class/cxi/","/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/after.json")
+summary = net_prof.summarize("/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/before.json", "/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/after.json")
+net_prof.dump(summary)
+net_prof.dump_html(summary, "/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/net_prof_report.html")
 ```
 
 ## Profiler Snapshots
