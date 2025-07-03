@@ -2,17 +2,22 @@
 
 net-prof is a network profiler library aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events. This tool will help to compare and diagnose a successful workload without any network issues with an unsuccessful workload due to a network issue.
 
-### Release v0.1.2
-- Added support for multi-interface profiling.
-- Fixed prior issues that prevented importation.
-
-### To Install
+## To Install
 
 ```
 pip install net-prof
 ```
 
-### Functions
+### Install in editable mode from project root:
+```
+pip install -e .
+```
+### Or use (workaround):
+```
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+```
+
+## Functions
 ```
 collect(input_directory, "counters.json")
 summarize(before, after)
@@ -20,7 +25,30 @@ dump(summary)
 dump_html(summary, output_html)
 ```
 
-### To Use
+## To Use
+
+```
+    # Example Utilizing 8 NIC/interfaces!
+
+import sys
+import os
+import net_prof
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+net_prof.collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "before.json"))
+net_prof.collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "after.json"))
+
+before = os.path.join(script_dir, "before.json")
+after = os.path.join(script_dir, "after.json")
+
+summary = net_prof.summarize(before, after)
+
+output_html = os.path.join(script_dir, "report_all.html")  # e.g., tests/report.html
+os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
+
+net_prof.dump_html(summary, output_html)
+```
 
 ```
     # Example Utilizing a single NIC/interface (cxi0). collect() now supports functionality for single NIC and multi NIC's!
@@ -46,43 +74,21 @@ dump(summary)
 dump_html(summary, output_html)
 ```
 
-```
-    # Example Utilizing 8 NIC/interfaces!
-
-import net_prof
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-collect("../sys/class/cxi", os.path.join(script_dir, "before.json"))
-# dist.all_reduce(x, op=dist.ReduceOp.SUM) - or - os.execute('ping google.com')
-collect("../sys/class/cxi", os.path.join(script_dir, "after.json"))
-
-before = os.path.join(script_dir, "before.json")
-after = os.path.join(script_dir, "after.json")
-
-summary = summarize(before, after)
-
-# Ensure output directory for charts exists within tests/ or project root
-output_html = os.path.join(script_dir, "report_all.html")
-os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
-
-dump_html(summary, output_html)
-```
-
-### Features in Devolopment:
+## Features in Devolopment:
 ```
 FIX -- report.html & report_2.html share the same charts when they shouldn't... (different data)
 ADD -- Create a single unified test instead of having a bunch of tests.
 ADD -- Adding more charts with mpl.
 ```
 
-### Profiler Snapshots
+## Profiler Snapshots
 
 ![Alt text](docs/image1.png)
 ![Alt text](docs/image2.png)
 ![Alt text](docs/net_prof_iface_chart.png)
 ![Alt text](docs/net_prof_sum_html.png)
 
-### References
+## References
 
 https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
 
