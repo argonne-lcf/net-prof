@@ -2,7 +2,6 @@ README.md
 pyproject.toml
 src/net_prof/__init__.py
 src/net_prof/__main__.py
-src/net_prof/engine (Copy).py
 src/net_prof/engine.py
 src/net_prof/visualize.py
 src/net_prof.egg-info/PKG-INFO
@@ -11,9 +10,10 @@ src/net_prof.egg-info/dependency_links.txt
 src/net_prof.egg-info/requires.txt
 src/net_prof.egg-info/top_level.txt
 src/net_prof/data/generate_grouping_rules.py
+src/net_prof/data/grouping_rules.csv
+src/net_prof/data/metrics.txt
 tests/test_collect.py
 tests/test_dump.py
-tests/test_html.py
 tests/test_html_2.py
 tests/test_iface_all.py
 tests/test_visualize.py

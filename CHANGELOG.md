@@ -1,4 +1,8 @@
 # Changelog:
+## [0.1.6] - 7-3-2025
+### Added
+- normalizing name as net_prof (instead of juggling net-prof for pip and net_prof for python)
+
 ## [0.1.5] - 7-3-2025
 ### Added
 - Fixed missing required .txt and .csv files from pypi package (net-prof/src/net_prof/data/metrics.txt & grouping_rules.csv) (added via .toml)

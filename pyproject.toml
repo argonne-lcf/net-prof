@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "net-prof"
-version = "0.1.5"
+name = "net_prof"
+version = "0.1.6"
 description = "Network Profiler for the HPE Cassini Cray NIC"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -24,7 +24,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/argonne-lcf/net-prof"
+Homepage = "https://github.com/argonne-lcf/net_prof"
 
 [tool.setuptools]
 include-package-data = true
