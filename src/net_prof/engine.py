@@ -277,7 +277,12 @@ def dump_html(summary: dict, output_file: str):
 
     # Prepare output path
     charts_dir = os.path.join(os.path.dirname(output_file), "charts")
+    existed = os.path.isdir(charts_dir)
     os.makedirs(charts_dir, exist_ok=True)
+    if existed:
+        print(f"Charts directory already exists at: {charts_dir}")
+    else:
+        print(f"Created charts directory at:      {charts_dir}")
 
     # Generate chart images
     iface1_barchart(summary, os.path.join(charts_dir, "iface1.png"))
@@ -289,8 +294,14 @@ def dump_html(summary: dict, output_file: str):
     iface7_barchart(summary, os.path.join(charts_dir, "iface7.png"))
     iface8_barchart(summary, os.path.join(charts_dir, "iface8.png"))
 
+    # one-time summary print after all images are done
+    print(f"Generated 8 chart images in:       {charts_dir}")
+
+    # get a human‐readable timestamp
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     # Start HTML
-    html.append("<html><head><title>Net-Prof Summary Report</title>")
+    html.append("<html><head><title>Net-Prof Summary Report — {now}</title>")
     html.append("<style>")
     html.append("body { font-family: sans-serif; padding: 2em; }")
     html.append("table { border-collapse: collapse; margin: 1em 0; width: 100%; }")
@@ -299,7 +310,7 @@ def dump_html(summary: dict, output_file: str):
     html.append("</style></head><body>")
 
     # Title and totals
-    html.append(f"<h1>Net-Prof Summary</h1>")
+    html.append(f"<h1>Net-Prof Summary <small>(HTML Report Created: {now})</h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
 
     # Charts (collapsible)

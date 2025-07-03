@@ -1,4 +1,14 @@
 # Changelog:
+## [0.1.5] - 7-3-2025
+### Added
+- Fixed missing required .txt and .csv files from pypi package (net-prof/src/net_prof/data/metrics.txt & grouping_rules.csv) (added via .toml)
+- Updated README - Fixes to examples, added Aurora test run to examples.
+- Updated Description in .toml
+- Removed engine (copy).py -- Removed other unneccesary files
+- Added statements that print out relating to image generation including dir of images
+- Added timestamp to html output.
+
+
 ## [0.1.4] - 7-2-2025
 ### Added
 - Fixed naming conventions within grouping_rules.csv, which was causing counters with numbers to not be tracked into the right group.
