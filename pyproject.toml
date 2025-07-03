@@ -30,11 +30,6 @@ Homepage = "https://github.com/argonne-lcf/net-prof"
 include-package-data = true
 package-dir = {"" = "src"}
 
-[tool.setuptools.sdist]
-include = [
-  "CHANGELOG.md"
-]
-
 [tool.setuptools.package-data]
 "net_prof" = ["data/metrics.txt", "data/grouping_rules.csv"]
 
