@@ -1,9 +1,9 @@
 Metadata-Version: 2.4
-Name: net-prof
-Version: 0.1.5
+Name: net_prof
+Version: 0.1.6
 Summary: Network Profiler for the HPE Cassini Cray NIC
 Author-email: Anthony Cardia <acardia@protonmail.com>, Kaushik Velusamy <kaushikvelusamy@gmail.com>
-Project-URL: Homepage, https://github.com/argonne-lcf/net-prof
+Project-URL: Homepage, https://github.com/argonne-lcf/net_prof
 Keywords: network,profiler,cxi,cassini
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
@@ -12,14 +12,16 @@ Description-Content-Type: text/markdown
 Requires-Dist: numpy
 Requires-Dist: matplotlib
 
-# net-prof
+# net_prof
 
-net-prof is a network profiler library aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events. This tool will help to compare and diagnose a successful workload without any network issues with an unsuccessful workload due to a network issue.
+net_prof is a network profiler library aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events. This tool will help to compare and diagnose a successful workload without any network issues with an unsuccessful workload due to a network issue.
 
 ## To Install
 
 ```
-pip install net-prof
+pip install net_prof
+- or -
+pip install net-prof (Legacy -- pip supports - or _)
 ```
 
 ### Install in editable mode from project root:
@@ -33,10 +35,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 ## Functions
 ```
-collect(input_directory, "counters.json")
+collect(input_directory, output.json)
 summarize(before, after)
 dump(summary)
-dump_html(summary, output_html)
+dump_html(summary, output.html)
 ```
 
 ### Example Utilizing multi-NIC
@@ -45,49 +47,39 @@ import sys
 import os
 import net_prof
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
+net_prof.collect("../sys/class/cxi", "/path/to/file/before.json"))
+# Perform some sort of action between before and after.
+net_prof.collect("../sys/class/cxi", "/path/to/file/after.json"))
 
-net_prof.collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "before.json"))
-net_prof.collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "after.json"))
+summary = net_prof.summarize("/path/to/file/before.json", "/path/to/file/after.json")
 
-before = os.path.join(script_dir, "before.json")
-after = os.path.join(script_dir, "after.json")
-
-summary = net_prof.summarize(before, after)
-
-output_html = os.path.join(script_dir, "report_all.html")  # e.g., tests/report.html
-os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
-
-net_prof.dump_html(summary, output_html)
-```
-
-### Example Utilizing a single NIC/interface (cxi0).
-```
-import net_prof
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-net_prof.collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json")) 
-net_prof.collect("../cxi/cxi0/device/telemetry", os.path.join(script_dir, "after.json"))
-
-before = os.path.join(script_dir, "before.json")
-after = os.path.join(script_dir, "after.json")
-
-output_html = os.path.join(script_dir, "report.html")
-os.makedirs(os.path.join(script_dir, "charts"), exist_ok=True)
-
-summary = net_prof.summarize(before, after)
 net_prof.dump(summary)
-net_prof.dump_html(summary, output_html)
+net_prof.dump_html(summary, "/path/to/file/report.html")
 ```
+
+### Instructions for single-NIC collection
+Instead of giving a ../sys/class/cxi directory:
+```
+net_prof.collect("../sys/class/cxi", os.path.join(script_dir, "before.json"))
+```
+pass in the whole directory up to /telemetry/ of specific NIC:
+```
+net_prof.collect("../sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json"))
+```
+
 ### Test used by Aurora:
 ```
 import os
 import net_prof
+
 target_host = "x4306c7s2b0n0.hostmgmt2306.cm.aurora.alcf.anl.gov"
+
 net_prof.collect("/sys/class/cxi/","/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/before.json")
 os.system(f"ping -c 4 {target_host}") 
 net_prof.collect("/sys/class/cxi/","/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/after.json")
+
 summary = net_prof.summarize("/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/before.json", "/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/after.json")
+
 net_prof.dump(summary)
 net_prof.dump_html(summary, "/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/net_prof_report.html")
 ```
@@ -103,7 +95,7 @@ net_prof.dump_html(summary, "/lus/flare/projects/datascience/kaushik/network/net
 
 https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
 
-https://github.com/argonne-lcf/net-prof
+https://github.com/argonne-lcf/net_prof
 
-https://pypi.org/project/net-prof/
+https://pypi.org/project/net_prof/
 

@@ -1,4 +1,17 @@
 # Changelog:
+## [0.1.7] - 7-7-2025
+### Added
+- Big Changes: Added time to html report, changes to JSON output files, and fixed bugs with groups.
+- Changes to README.md
+- Added timing to collect()
+- Added timing to html report
+- Refactoring: Changes to JSON output: added new category meta, which contains directory info and timing
+- Refactoring: Changes to summarize
+- Changed mismatched timezone, normalized to UTC
+- Refactored the way counters are grouped -- Now we use "groups" instead of "group" which can take in multiple groups instead of just one.
+- Removed match_group_and_description()
+- Added match_all_groups()
+
 ## [0.1.6] - 7-3-2025
 ### Added
 - normalizing name as net_prof (instead of juggling net-prof for pip and net_prof for python)

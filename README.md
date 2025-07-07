@@ -6,17 +6,6 @@ net_prof is a network profiler library aimed to profile the HPE Cray Cassini Net
 
 ```
 pip install net_prof
-- or -
-pip install net-prof (Legacy -- pip supports - or _)
-```
-
-### Install in editable mode from project root:
-```
-pip install -e .
-```
-### Or use (workaround):
-```
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 ```
 
 ## Functions
@@ -29,8 +18,6 @@ dump_html(summary, output.html)
 
 ### Example Utilizing multi-NIC
 ```
-import sys
-import os
 import net_prof
 
 net_prof.collect("../sys/class/cxi", "/path/to/file/before.json"))
@@ -44,11 +31,13 @@ net_prof.dump_html(summary, "/path/to/file/report.html")
 ```
 
 ### Instructions for single-NIC collection
-Instead of giving a ../sys/class/cxi directory:
+If you want to collect a single-NIC, pass in the /telemetry/ directory, otherwise, provide a /cxi/ directory.
+For example:
+Instead of giving a ../sys/class/cxi/ directory:
 ```
 net_prof.collect("../sys/class/cxi", os.path.join(script_dir, "before.json"))
 ```
-pass in the whole directory up to /telemetry/ of specific NIC:
+pass in the whole directory up to /telemetry of specific NIC:
 ```
 net_prof.collect("../sys/class/cxi/cxi0/device/telemetry", os.path.join(script_dir, "before.json"))
 ```

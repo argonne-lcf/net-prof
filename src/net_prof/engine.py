@@ -1,24 +1,16 @@
 # engine.py
 
-# collect(path: str) → Collects raw counter data from the system and saves it to path.
-# summarize(before_path: str, after_path: str) → Loads both files and computes a structured summary:
-# Diffs by interface
-# Top N metrics per interface
-# Zero vs non-zero count metrics
-#dump(summary: dict) → Neatly prints summary to terminal.
-
 import glob
 import os
 import json
 import re
 import csv
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Optional
 from .visualize import (
     iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
     iface5_barchart, iface6_barchart, iface7_barchart, iface8_barchart
 )
 from datetime import datetime, timezone
-
 
 def load_lines(path: str) -> List[str]:
     """Read a file and return a list of its lines (no trailing newline)."""
@@ -33,7 +25,6 @@ def parse_metric_name(raw: str) -> str:
 def parse_counter(raw: str) -> int:
     """Given 'value@timestamp', return the integer counter before the @."""
     return int(raw.split('@')[0])
-
 
 def load_grouping_rules(rules_path: str) -> List[Dict]:
     """Load grouping rules from a CSV into compiled regex patterns."""
@@ -51,14 +42,21 @@ def load_grouping_rules(rules_path: str) -> List[Dict]:
             })
     return rules
 
-
-def match_group_and_description(counter_name: str, rules: list[dict]) -> tuple[str, str]:
-    """Not implemented yet. Return (group, description) for the given counter name based on regex rules."""
+def match_all_groups(counter_name: str, rules: List[Dict]) -> Tuple[List[str], List[str]]:
+    """
+    Return two parallel lists:
+      - all groups whose regex matches counter_name
+      - all corresponding descriptions
+    If none match, returns (["UNGROUPED"], ["No description"]).
+    """
+    groups, descs = [], []
     for rule in rules:
         if rule['regex'].match(counter_name):
-            return rule['group'], rule['description']
-    return "UNGROUPED", "No description"
-
+            groups.append(rule['group'])
+            descs.append(rule['description'])
+    if not groups:
+        return ["UNGROUPED"], ["No description"]
+    return groups, descs
 
 def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[str, Any]]:
     """
@@ -88,14 +86,13 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
         except ValueError:
             timestamp = None
             
-        # convert to a human-readable ISO timestamp in UTC
         human_ts = (
         datetime.fromtimestamp(timestamp, timezone.utc)
         .isoformat()
         if timestamp is not None else None
         )
 
-        group, description = match_group_and_description(filename, rules)
+        groups, descriptions = match_all_groups(filename, rules)
         collected.append({
             'id':            idx,
             'interface':     interface_id,
@@ -103,12 +100,11 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
             'value':         value,
             'timestamp':     timestamp,
             'timestamp_ISO_8601': human_ts,
-            'group':         group,
-            'description':   description
+            'groups':         groups,
+            'descriptions':   descriptions
         })
 
     return collected
-
 
 def collect(input_path: str, output_file: str):
     """
@@ -116,18 +112,21 @@ def collect(input_path: str, output_file: str):
     Writes a merged JSON list into output_file.
     Raises ValueError on invalid input.
     """
-    # 1) Normalize and verify the base path exists
+    # Normalize and verify the base path exists
     input_path = os.path.normpath(input_path)
     if not os.path.isdir(input_path):
         raise ValueError(f"Path {input_path!r} does not exist or is not a directory.")
-
+    
+    # Collect start_time
+    start_time = datetime.now(timezone.utc)
+    
     all_entries: List[Dict[str, Any]] = []
 
     basename      = os.path.basename(input_path)
     parent        = os.path.basename(os.path.dirname(input_path))
     grandparent   = os.path.basename(os.path.dirname(os.path.dirname(input_path)))
 
-    # 2A) Single-interface mode: basename is “telemetry” and grandparent is “cxi<digit>”
+    # Single-interface mode: basename is “telemetry” and grandparent is “cxi<digit>”
     if basename == "telemetry" and re.match(r"cxi\d+", grandparent):
         # sanity check: directory not empty
         files = [f for f in os.listdir(input_path)
@@ -139,7 +138,7 @@ def collect(input_path: str, output_file: str):
         print(f"Collecting interface {iface_num} from {input_path}")
         all_entries = _collect_one_interface(input_path, iface_num)
 
-    # 2B) Multi-interface mode: parent of cxi* subdirs
+    # Multi-interface mode: parent of cxi* subdirs
     elif os.path.isdir(input_path) and any(re.fullmatch(r"cxi\d+", d) for d in os.listdir(input_path)):
         print(f"Scanning for telemetry under {input_path}")
         found_any = False
@@ -166,81 +165,139 @@ def collect(input_path: str, output_file: str):
             f"Path {input_path!r} is neither a telemetry directory "
             "nor a parent of cxi* interfaces."
         )
+    
+    # Collect end_time, calculate duration
+    end_time = datetime.now(timezone.utc)
+    duration = (end_time - start_time).total_seconds()
+    
+    meta = {
+        "input_path":  input_path,
+        "started_at":  start_time.isoformat(),
+        "finished_at": end_time.isoformat(),
+        "duration_s":  (end_time - start_time).total_seconds()
+    }
 
-    # 3) Write merged JSON
-    with open(output_file, "w") as out:
-        json.dump(all_entries, out, indent=2)
+    out = {
+        "meta":     meta,
+        "counters": all_entries
+    }
 
-    print(f"Collected {len(all_entries)} counters → {output_file}")
+    with open(output_file, "w") as out_f:
+        json.dump(out, out_f, indent=2)
+    print(f"Collected {len(all_entries)} counters in {meta['duration_s']:.2f}s → {output_file}")
 
-
-
-def summarize(before_path: str, after_path: str, metrics_path: str = None) -> Dict[str, Any]:
+def summarize(before_path: str,
+              after_path: str,
+              metrics_path: Optional[str] = None
+             ) -> Dict[str, Any]:
     """
     Load metrics definitions and two counter dumps (txt or json), compute differences,
-    and return a structured summary including collected json data if provided.
+    and return a structured summary including collected json data and metadata if provided.
     """
+    # locate metrics.txt
     if metrics_path is None:
-        metrics_path = os.path.join(os.path.dirname(__file__), 'data', 'metrics.txt')
+        metrics_path = os.path.join(
+            os.path.dirname(__file__),
+            'data',
+            'metrics.txt'
+        )
     metrics = load_lines(metrics_path)
-    # Detect JSON vs txt dumps
+
+    # detect JSON vs. plain-text dumps
     is_json = before_path.lower().endswith('.json') and after_path.lower().endswith('.json')
     if is_json:
-        before_list = json.load(open(before_path))
-        after_list = json.load(open(after_path))
+        before_json = json.load(open(before_path))
+        after_json  = json.load(open(after_path))
+
+        # pull out metadata blocks (if collect() wrote them)
+        before_meta = before_json.get('meta', {})
+        after_meta  = after_json .get('meta', {})
+
+        # pull out the actual counter lists
+        before_list = before_json.get('counters', before_json)
+        after_list  = after_json .get('counters',  after_json)
     else:
+        before_meta = {}
+        after_meta  = {}
+        before_list = None  # not used in non-JSON mode
+        after_list  = None
         before = load_lines(before_path)
-        after = load_lines(after_path)
-    num_metrics = len(metrics)
+        after  = load_lines(after_path)
+
+    num_metrics    = len(metrics)
     num_interfaces = 8
-    results = []
+
+    # build diff results
+    results: List[Dict[str, Any]] = []
     for m_idx, raw_metric in enumerate(metrics):
-        metric_id = m_idx + 1
+        metric_id   = m_idx + 1
         metric_name = parse_metric_name(raw_metric)
         for iface in range(1, num_interfaces + 1):
             if is_json:
-                # lookup by filename match
-                key = metric_name
-                cnt_before = next((e['value'] for e in before_list
-                                   if e['counter_name'].endswith(metric_name) and e['interface']==iface), 0)
-                cnt_after = next((e['value'] for e in after_list
-                                  if e['counter_name'].endswith(metric_name) and e['interface']==iface), 0)
+                cnt_before = next(
+                    (e['value'] for e in before_list
+                     if e['counter_name'].endswith(metric_name) and e['interface'] == iface),
+                    0
+                )
+                cnt_after = next(
+                    (e['value'] for e in after_list
+                     if e['counter_name'].endswith(metric_name) and e['interface'] == iface),
+                    0
+                )
             else:
                 idx = (iface - 1) * num_metrics + m_idx
                 cnt_before = parse_counter(before[idx])
-                cnt_after = parse_counter(after[idx])
+                cnt_after  = parse_counter(after[idx])
+
             diff = cnt_after - cnt_before
             results.append({
-                'iface': iface,
-                'metric_id': metric_id,
-                'metric_name': metric_name,
-                'diff': diff
+                'iface':        iface,
+                'metric_id':    metric_id,
+                'metric_name':  metric_name,
+                'diff':         diff
             })
+
+    # summary stats
     total_non_zero = sum(1 for r in results if r['diff'] != 0)
-    non_zero_per_iface = {i: sum(1 for r in results if r['iface']==i and r['diff']!=0)
-                          for i in range(1, num_interfaces+1)}
-    top20_per_iface = {}
-    for i in range(1, num_interfaces+1):
-        iface_rs = [r for r in results if r['iface']==i]
-        iface_rs.sort(key=lambda r: abs(r['diff']), reverse=True) # Takes absolute value of diff to avoid the scenario where negative differences go unaccounted for.
+    non_zero_per_iface = {
+        i: sum(1 for r in results if r['iface'] == i and r['diff'] != 0)
+        for i in range(1, num_interfaces + 1)
+    }
+
+    # top-20 per interface, sorted by absolute diff
+    top20_per_iface: Dict[int, List[Dict[str, Any]]] = {}
+    for i in range(1, num_interfaces + 1):
+        iface_rs = [r for r in results if r['iface'] == i]
+        iface_rs.sort(key=lambda r: abs(r['diff']), reverse=True)
         top20_per_iface[i] = iface_rs[:20]
-    important_ids = [17,18,22,839,835,869,873,
-                     564,565,613,614,
-                     1600,1599,1598,1597,
-                     1724]
-    pivot = {}
+
+    # pivot out the “important” metrics
+    important_ids = [
+        17, 18, 22, 839, 835, 869, 873,
+        564, 565, 613, 614,
+        1600, 1599, 1598, 1597,
+        1724
+    ]
+    pivot: Dict[int, Dict[str, Any]] = {}
     for r in results:
         mid = r['metric_id']
         if mid not in important_ids:
             continue
-        pivot.setdefault(mid, {'metric_name': r['metric_name'], 'diffs': {}})
+        pivot.setdefault(mid, {
+            'metric_name': r['metric_name'],
+            'diffs': {}
+        })
         pivot[mid]['diffs'][r['iface']] = r['diff']
+
+    # assemble and return the summary
     return {
-        'total_non_zero': total_non_zero,
+        'before_meta':       before_meta,
+        'after_meta':        after_meta,
+        'total_non_zero':    total_non_zero,
         'non_zero_per_iface': non_zero_per_iface,
-        'top20_per_iface': top20_per_iface,
+        'top20_per_iface':   top20_per_iface,
         'important_metrics': pivot,
-        'collected': before_list if is_json else []
+        'collected':         before_list if is_json else []
     }
 
 
@@ -273,8 +330,7 @@ def dump(summary: Dict[str, Any]):
         
 def dump_html(summary: dict, output_file: str):
     """Write the summary as an HTML report with charts."""
-    html = []
-
+   
     # Prepare output path
     charts_dir = os.path.join(os.path.dirname(output_file), "charts")
     existed = os.path.isdir(charts_dir)
@@ -296,22 +352,39 @@ def dump_html(summary: dict, output_file: str):
 
     # one-time summary print after all images are done
     print(f"Generated 8 chart images in:       {charts_dir}")
-
+    
     # get a human‐readable timestamp
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(timezone.utc)
 
     # Start HTML
-    html.append("<html><head><title>Net-Prof Summary Report — {now}</title>")
+    html = []
+    html.append(f"<html><head><title>Net-Prof Summary Report — {now}</title>")
     html.append("<style>")
-    html.append("body { font-family: sans-serif; padding: 2em; }")
-    html.append("table { border-collapse: collapse; margin: 1em 0; width: 100%; }")
-    html.append("th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }")
-    html.append("th { background-color: #eee; }")
+    html.append("  body { font-family: sans-serif; padding: 2em; }")
+    html.append("  table { border-collapse: collapse; margin: 1em 0; width: 100%; }")
+    html.append("  th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }")
+    html.append("  th { background-color: #eee; }")
     html.append("</style></head><body>")
 
-    # Title and totals
-    html.append(f"<h1>Net-Prof Summary <small>(HTML Report Created: {now})</h1>")
+    # Title and totals (now with closed <small>)
+    html.append(f"<h1>Net-Prof Summary <small>(HTML Report Created: {now})</small></h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
+    
+    # If we have meta from JSON, show it
+    bm = summary.get("before_meta", {})
+    am = summary.get("after_meta",  {})
+    if bm:
+        html.append(f"<p><strong>Before snapshot</strong> collected from "
+                    f"{bm['input_path']}<br>"
+                    f"Started at:  {bm['started_at']}<br>"
+                    f"Finished at: {bm['finished_at']} "
+                    f"(took {bm['duration_s']:.2f}s)</p>")
+    if am:
+        html.append(f"<p><strong>After snapshot</strong> collected from "
+                    f"{am['input_path']}<br>"
+                    f"Started at:  {am['started_at']}<br>"
+                    f"Finished at: {am['finished_at']} "
+                    f"(took {am['duration_s']:.2f}s)</p>")
 
     # Charts (collapsible)
     html.append("<details open>")  # add `open` if you want it expanded by default
@@ -354,7 +427,7 @@ def dump_html(summary: dict, output_file: str):
     html.append("<h2>Counter Groups Detail</h2>")
 
     # List of (group_key, human-readable description)
-    groups = [
+    cxi_groups = [
         ("CxiPerfStats",           "Traffic Congestion Counter Group"),
         ("CxiErrStats",            "Network Error Counter Group"),
         ("CxiOpCommands",          "Operation (Command) Counter Group"),
@@ -373,26 +446,33 @@ def dump_html(summary: dict, output_file: str):
     #   { 'id', 'interface', 'counter_name', 'value', 'timestamp', 'group', 'description' }
     collected = summary.get("collected", [])
 
-    for key, desc in groups:
+    # for each group, open a <details> and its table…
+    for key, desc in cxi_groups:
         html.append(f"<details><summary><strong>{key}</strong> — {desc}</summary>")
-        html.append("<table><tr>"
-                    "<th>ID #</th><th>Interface #</th>"
-                    "<th>Counter Name</th><th>Value</th><th>Description</th>"
-                    "</tr>")
+        html.append(
+            "<table>"
+            "<tr>"
+              "<th>ID #</th><th>Interface #</th>"
+              "<th>Counter Name</th><th>Value</th><th>Description</th>"
+            "</tr>"
+        )
 
+        # …then add one <tr> per matching entry…
         for entry in collected:
-            if entry["group"] == key:
-                # Tooltip on description cell via `title`
+            if key in entry.get("groups", []):
+                idx        = entry["groups"].index(key)
+                group_desc = entry["descriptions"][idx]
                 html.append(
                     "<tr>"
                     f"<td>{entry['id']}</td>"
                     f"<td>{entry['interface']}</td>"
                     f"<td>{entry['counter_name']}</td>"
                     f"<td>{entry['value']}</td>"
-                    f"<td title=\"{entry['description']}\">{entry['description']}</td>"
+                    f"<td title=\"{group_desc}\">{group_desc}</td>"
                     "</tr>"
                 )
 
+        # …and *only after* all rows, close the table and the details tag
         html.append("</table></details>")
 
     # --- end collapsible groups ---
