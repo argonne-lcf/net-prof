@@ -38,25 +38,27 @@ def load_grouping_rules(rules_path: str) -> List[Dict]:
             rules.append({
                 'regex': re.compile(pattern, re.IGNORECASE),
                 'group': row.get('Counter_Group', 'UNGROUPED'),
-                'description': row.get('Counter_Description', 'No description')
+                'description': row.get('Counter_Description', 'No description'),
+                'unit': row.get('Unit', 'No Units')
             })
     return rules
 
 def match_all_groups(counter_name: str, rules: List[Dict]) -> Tuple[List[str], List[str]]:
     """
-    Return two parallel lists:
+    Return three parallel lists:
       - all groups whose regex matches counter_name
       - all corresponding descriptions
-    If none match, returns (["UNGROUPED"], ["No description"]).
+    If none match, returns (["UNGROUPED"], ["No description"], ["No Units"]).
     """
-    groups, descs = [], []
+    groups, descs, units = [], [], []
     for rule in rules:
         if rule['regex'].match(counter_name):
             groups.append(rule['group'])
             descs.append(rule['description'])
+            units.append(rule['unit'])
     if not groups:
-        return ["UNGROUPED"], ["No description"]
-    return groups, descs
+        return ["UNGROUPED"], ["No description"], ["No Units"]
+    return groups, descs, units
 
 def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[str, Any]]:
     """
@@ -92,7 +94,7 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
         if timestamp is not None else None
         )
 
-        groups, descriptions = match_all_groups(filename, rules)
+        groups, descriptions, units = match_all_groups(filename, rules)
         collected.append({
             'id':            idx,
             'interface':     interface_id,
@@ -101,7 +103,8 @@ def _collect_one_interface(telemetry_dir: str, interface_id: int) -> List[Dict[s
             'timestamp':     timestamp,
             'timestamp_ISO_8601': human_ts,
             'groups':         groups,
-            'descriptions':   descriptions
+            'descriptions':   descriptions,
+            'units': units
         })
 
     return collected

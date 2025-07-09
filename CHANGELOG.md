@@ -1,4 +1,9 @@
 # Changelog:
+## [0.1.8] - 7-9-2025
+### Added
+- Made changes to engine.py to add units from grouping_rules.csv into the dict that is input into .JSON
+- Did some cleaning/refactoring.. Deleted some old files, compiled test files into 1 test.py.
+
 ## [0.1.7] - 7-7-2025
 ### Added
 - Big Changes: Added time to html report, changes to JSON output files, and fixed bugs with groups.
