@@ -1,6 +1,6 @@
 # net_prof
 
-net_prof is a network profiler library aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events. This tool will help to compare and diagnose a successful workload without any network issues with an unsuccessful workload due to a network issue.
+net_prof is a network profiler library aimed to profile the HPE Cray Cassini Network Interface Card (NIC) on a compute node to collect, analyze and visualize the network counter events. This tool will help to compare and diagnose a successful workload without any network issues with an unsuccessful workload due to a network issue. net-prof summary reports help to understand, analyze, and optimize current network bandwidth usage for any type of communication — whether it’s ping, point-to-point, send-receive, MPI collectives, or PyTorch CCL collectives — by pinpointing why the current communication API is not achieving its theoretical peak performance.
 
 ## To Install
 
@@ -57,6 +57,54 @@ summary = net_prof.summarize("/lus/flare/projects/datascience/kaushik/network/ne
 
 net_prof.dump(summary)
 net_prof.dump_html(summary, "/lus/flare/projects/datascience/kaushik/network/net-prof-tests/ping-test/net_prof_report.html")
+```
+
+### Pytorch example:
+```
+import net_prof
+import torch.distributed as dist
+
+net_prof.collect("../sys/class/cxi", "/path/to/file/before.json"))
+dist.init_process_group(backend="nccl")   # or gloo
+x = torch.tensor([1.0], device="cuda")
+dist.all_reduce(x, op=dist.ReduceOp.SUM)
+net_prof.collect("../sys/class/cxi", "/path/to/file/after.json"))
+
+summary = net_prof.summarize("/path/to/file/before.json", "/path/to/file/after.json")
+
+net_prof.dump(summary)
+net_prof.dump_html(summary, "/path/to/file/report.html")
+```
+
+### Healthy vs. Faulty Ping Test:
+Net-Prof lets you contrast a good and bad run to pinpoint which NIC counters change. 
+```
+# Simulated "Healthy Node"
+
+import net_prof, os
+
+target = "good-node"
+
+net_prof.collect("/sys/class/cxi", "before_healthy.json")
+os.system(f"ping -c 4 {target}")
+net_prof.collect("/sys/class/cxi", "after_healthy.json")
+
+net_prof.dump_html(net_prof.summarize("before_healthy.json", "after_healthy.json"),
+                   "report_healthy.html")
+```
+```
+# Simulated "Faulty Node"
+
+import net_prof, os
+
+target = "bad-node"          # simulate issue (e.g., firewall drop)
+
+net_prof.collect("/sys/class/cxi", "before_faulty.json")
+os.system(f"ping -c 4 {target}")   # expect high loss / timeout
+net_prof.collect("/sys/class/cxi", "after_faulty.json")
+
+net_prof.dump_html(net_prof.summarize("before_faulty.json", "after_faulty.json"),
+                   "report_faulty.html")
 ```
 
 ## Profiler Snapshots
