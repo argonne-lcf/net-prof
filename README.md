@@ -107,6 +107,31 @@ net_prof.dump_html(net_prof.summarize("before_faulty.json", "after_faulty.json")
                    "report_faulty.html")
 ```
 
+### Notes
+- We are aware that the Ping issue may not be purely due to cxi or nics, there could be many other reasons like memory, network switches or hardware going down, however this tool is helpful to gain network insights.
+- A function such as compare() should be devoloped -- This could allow a user to compare a "idle" test to a "real" test, which visualizes changes between the tests.
+
+It could be implemented as such:
+```
+# DO NOT FOLLOW THIS CODE. THIS IS A REPRESENTATION OF WHAT CAPABALITIES I WANT net_prof TO HAVE IN THE FUTURE
+# psuedocode:
+
+net_prof.collect(before_idle.json)
+time.sleep(5) # doing effectively "nothing" or just idling...
+net_prof.collect(after_idle.json)
+
+idle_test = net_prof.summarize(before_idle.json, after_idle.json)
+
+net_prof.collect(before_ping.json)
+os.system(f"ping -c 4 {target}") 
+net_prof.collect(after_ping.json)
+
+ping_test = net_prof.summarize(before_ping.json, after_ping.json)
+
+compare(idle_test, ping_test, report_idle_vs_ping.html)
+```
+
+
 ## Profiler Snapshots
 
 ![Alt text](docs/image1.png)
