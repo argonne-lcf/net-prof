@@ -14,7 +14,8 @@ from net_prof import summarize, dump, dump_html, collect # , dump_report
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "before.json"))
-
+print(f"Waiting 5 seconds before moving onto after.json...")
+time.sleep(5)
 collect("/home/kvelusamy/Downloads/dummy/sys/class/cxi", os.path.join(script_dir, "after.json"))
 
 before = os.path.join(script_dir, "before.json")

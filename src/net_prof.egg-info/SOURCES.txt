@@ -12,8 +12,4 @@ src/net_prof.egg-info/top_level.txt
 src/net_prof/data/generate_grouping_rules.py
 src/net_prof/data/grouping_rules.csv
 src/net_prof/data/metrics.txt
-tests/test_collect.py
-tests/test_dump.py
-tests/test_html_2.py
-tests/test_iface_all.py
-tests/test_visualize.py
+tests/test.py

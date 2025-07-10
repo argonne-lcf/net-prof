@@ -1,4 +1,8 @@
 # Changelog:
+## [0.1.9] - 7-10-2025
+### Added
+- Changes to html output, cleaned up, added units
+
 ## [0.1.8] - 7-9-2025
 ### Added
 - Made changes to engine.py to add units from grouping_rules.csv into the dict that is input into .JSON

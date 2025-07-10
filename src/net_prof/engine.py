@@ -332,9 +332,13 @@ def dump(summary: Dict[str, Any]):
         
         
 def dump_html(summary: dict, output_file: str):
-    """Write the summary as an HTML report with charts."""
-   
-    # Prepare output path
+    """
+    Write the summary as a self-contained HTML report with charts.
+    """
+
+    # ------------------------------------------------------------------ #
+    # 1.  Make /charts dir & render 8 bar-charts                         #
+    # ------------------------------------------------------------------ #
     charts_dir = os.path.join(os.path.dirname(output_file), "charts")
     existed = os.path.isdir(charts_dir)
     os.makedirs(charts_dir, exist_ok=True)
@@ -343,7 +347,6 @@ def dump_html(summary: dict, output_file: str):
     else:
         print(f"Created charts directory at:      {charts_dir}")
 
-    # Generate chart images
     iface1_barchart(summary, os.path.join(charts_dir, "iface1.png"))
     iface2_barchart(summary, os.path.join(charts_dir, "iface2.png"))
     iface3_barchart(summary, os.path.join(charts_dir, "iface3.png"))
@@ -352,36 +355,54 @@ def dump_html(summary: dict, output_file: str):
     iface6_barchart(summary, os.path.join(charts_dir, "iface6.png"))
     iface7_barchart(summary, os.path.join(charts_dir, "iface7.png"))
     iface8_barchart(summary, os.path.join(charts_dir, "iface8.png"))
-
-    # one-time summary print after all images are done
     print(f"Generated 8 chart images in:       {charts_dir}")
-    
-    # get a human‐readable timestamp
+
     now = datetime.now(timezone.utc)
 
-    # Start HTML
-    html = []
-    html.append(f"<html><head><title>Net-Prof Summary Report — {now}</title>")
-    html.append("<style>")
-    html.append("  body { font-family: sans-serif; padding: 2em; }")
-    html.append("  table { border-collapse: collapse; margin: 1em 0; width: 100%; }")
-    html.append("  th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }")
-    html.append("  th { background-color: #eee; }")
-    html.append("</style></head><body>")
+    # ------------------------------------------------------------------ #
+    # 2.  Start HTML / CSS                                               #
+    # ------------------------------------------------------------------ #
+    html: list[str] = []
+    html.append(f"<html><head><title>Net-Prof Report — {now}</title>")
+    html.append(r"""
+<style>
+ body  { font-family: system-ui, sans-serif; margin:0; padding:2rem; background:#fafafa; }
+ main  { max-width:1200px; margin:auto; }
+ h1,h2 { margin-top:0 }
+ table { border-collapse:collapse; width:100%; margin:1.5rem 0; font-size:0.9rem;
+         background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+ th,td { border:1px solid #e0e0e0; padding:0.45rem 0.65rem; text-align:left; }
+ th    { background:#f5f5f5 }
+ tr:nth-child(even) { background:#fafafa }
+ tr:hover { background:#f0f7ff }
+ summary { cursor:pointer; font-weight:600 }
+ details>summary { padding:0.35rem; border-radius:4px }
+ details[open]>summary { background:#e8f0fe }
+ img   { border:1px solid #ddd; border-radius:4px; margin-bottom:1rem; max-width:100% }
+</style></head><body><main>
+""")
 
-    # Title and totals (now with closed <small>)
-    html.append(f"<h1>Net-Prof Summary <small>(HTML Report Created: {now})</small></h1>")
+    # ------------------------------------------------------------------ #
+    # 3.  Header & meta                                                  #
+    # ------------------------------------------------------------------ #
+    html.append(f"<h1>Net-Prof Summary <small style='font-size:0.6em'>(created {now})</small></h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
-    
-    # If we have meta from JSON, show it
+
     bm = summary.get("before_meta", {})
     am = summary.get("after_meta",  {})
+
     if bm:
         html.append(f"<p><strong>Before snapshot</strong> collected from "
                     f"{bm['input_path']}<br>"
                     f"Started at:  {bm['started_at']}<br>"
                     f"Finished at: {bm['finished_at']} "
                     f"(took {bm['duration_s']:.2f}s)</p>")
+
+    if bm and am and 'finished_at' in bm and 'started_at' in am:
+        gap = (datetime.fromisoformat(am['started_at']) -
+               datetime.fromisoformat(bm['finished_at'])).total_seconds()
+        html.append(f"<p><strong>Operation between collection</strong>: (took {gap:.2f}s)</p>")
+
     if am:
         html.append(f"<p><strong>After snapshot</strong> collected from "
                     f"{am['input_path']}<br>"
@@ -389,101 +410,136 @@ def dump_html(summary: dict, output_file: str):
                     f"Finished at: {am['finished_at']} "
                     f"(took {am['duration_s']:.2f}s)</p>")
 
-    # Charts (collapsible)
-    html.append("<details open>")  # add `open` if you want it expanded by default
-    html.append("<summary><h2>Top 20 Diffs by Interface (Charts)</h2></summary>")
-    for i in range(1, 9):
-        html.append(f"<h3>Interface {i}</h3>")
-        html.append(f"<img src='charts/iface{i}.png' style='width:100%; max-width:800px;'><br><br>")
-    html.append("</details>")
-
-    # Per-interface counts
+    # ------------------------------------------------------------------ #
+    # 4.  Non-zero per-iface table                                       #
+    # ------------------------------------------------------------------ #
     html.append("<h3>Non-zero Diffs by Interface</h3>")
     html.append("<table><tr><th>Interface</th><th>Non-zero Count</th></tr>")
     for iface, count in summary['non_zero_per_iface'].items():
         html.append(f"<tr><td>Interface {iface}</td><td>{count} / 1890</td></tr>")
     html.append("</table>")
 
-    # Top 20 per iface
-    # Raw tables (collapsible)
+    # ------------------------------------------------------------------ #
+    # 5.  NEW  — Counters-per-group table                                #
+    # ------------------------------------------------------------------ #
+    collected = summary.get("collected", [])
+    group_counts: dict[str, int] = {}
+    for entry in collected:
+        for g in entry.get("groups", []):
+            group_counts[g] = group_counts.get(g, 0) + 1
+
+    if group_counts:
+        html.append("<h3>Counters per Group</h3>")
+        html.append("<table><tr><th>Group</th><th># Counters</th></tr>")
+        # sort by descending count
+        for g, n in sorted(group_counts.items(), key=lambda kv: kv[1], reverse=True):
+            html.append(f"<tr><td>{g}</td><td>{n}</td></tr>")
+        html.append("</table>")
+
+    # ------------------------------------------------------------------ #
+    # 6.  Charts section (collapsed)                                     #
+    # ------------------------------------------------------------------ #
     html.append("<details>")
-    html.append("<h3>Top 20 Diffs per Interface (Raw Table)</h3>")
+    html.append("<summary><h2>Top 20 Diffs by Interface — Charts</h2></summary>")
+    for i in range(1, 9):
+        html.append(f"<h4>Interface {i}</h4>")
+        html.append(f"<img src='charts/iface{i}.png' alt='Interface {i} bar chart'>")
+    html.append("</details>")
+
+    # ------------------------------------------------------------------ #
+    # 7.  Top-20 raw tables (collapsed)                                  #
+    # ------------------------------------------------------------------ #
+    html.append("<details>")
+    html.append("<summary><h2>Top 20 Diffs by Interface — Raw Tables</h2></summary>")
     for iface, entries in summary['top20_per_iface'].items():
         html.append(f"<h4>Interface {iface}</h4>")
         html.append("<table><tr><th>Rank</th><th>Metric ID</th><th>Metric Name</th><th>Diff</th></tr>")
         for rank, entry in enumerate(entries, start=1):
-            html.append(f"<tr><td>{rank}</td><td>{entry['metric_id']}</td><td>{entry['metric_name']}</td><td>{entry['diff']}</td></tr>")
+            html.append(f"<tr><td>{rank}</td><td>{entry['metric_id']}</td>"
+                        f"<td>{entry['metric_name']}</td><td>{entry['diff']}</td></tr>")
         html.append("</table>")
     html.append("</details>")
 
-    # Important metrics
-    html.append("<h3>Important Metrics</h3>")
-    html.append("<table><tr><th>Metric ID</th><th>Metric Name</th>" + "".join(f"<th>Iface {i}</th>" for i in range(1,9)) + "</tr>")
+    # ------------------------------------------------------------------ #
+    # 8.  Important metrics (collapsible)                                #
+    # ------------------------------------------------------------------ #
+    html.append("<details>")
+    html.append("<summary><h2>Important Metrics</h2></summary>")
+    html.append("<table><tr><th>Metric ID</th><th>Metric Name</th>" +
+                "".join(f"<th>Iface {i}</th>" for i in range(1, 9)) + "</tr>")
     for mid, data in summary['important_metrics'].items():
         html.append(f"<tr><td>{mid}</td><td>{data['metric_name']}</td>")
         for i in range(1, 9):
             html.append(f"<td>{data['diffs'].get(i, 0)}</td>")
         html.append("</tr>")
-    html.append("</table>")
+    html.append("</table></details>")
 
-# --- COLLAPSIBLE GROUPS SECTION ---
+    # ------------------------------------------------------------------ #
+    # 9.  Counter-groups detail (one row per counter, 8 iface columns)   #
+    # ------------------------------------------------------------------ #
     html.append("<h2>Counter Groups Detail</h2>")
 
-    # List of (group_key, human-readable description)
     cxi_groups = [
-        ("CxiPerfStats",           "Traffic Congestion Counter Group"),
-        ("CxiErrStats",            "Network Error Counter Group"),
-        ("CxiOpCommands",          "Operation (Command) Counter Group"),
-        ("CxiOpPackets",           "Operation (Packet) Counter Group"),
-        ("CxiDmaEngine",           "DMA Engine Counter Group"),
-        ("CxiWritesToHost",        "Writes-to-Host Counter Group"),
+        ("CxiPerfStats",            "Traffic Congestion Counter Group"),
+        ("CxiErrStats",             "Network Error Counter Group"),
+        ("CxiOpCommands",           "Operation (Command) Counter Group"),
+        ("CxiOpPackets",            "Operation (Packet) Counter Group"),
+        ("CxiDmaEngine",            "DMA Engine Counter Group"),
+        ("CxiWritesToHost",         "Writes-to-Host Counter Group"),
         ("CxiMessageMatchingPooled","Message Matching of Pooled Counters"),
-        ("CxiTranslationUnit",     "Translation Unit Counter Group"),
-        ("CxiLatencyHist",         "Latency Histogram Counter Group"),
-        ("CxiPctReqRespTracking",  "PCT Request & Response Tracking Counter Group"),
-        ("CxiLinkReliability",     "Link Reliability Counter Group"),
-        ("CxiCongestion",          "Congestion Counter Group"),
+        ("CxiTranslationUnit",      "Translation Unit Counter Group"),
+        ("CxiLatencyHist",          "Latency Histogram Counter Group"),
+        ("CxiPctReqRespTracking",   "PCT Request & Response Tracking Counter Group"),
+        ("CxiLinkReliability",      "Link Reliability Counter Group"),
+        ("CxiCongestion",           "Congestion Counter Group"),
     ]
 
-    # assume your collect() has populated summary['collected'] as a list of dicts:
-    #   { 'id', 'interface', 'counter_name', 'value', 'timestamp', 'group', 'description' }
     collected = summary.get("collected", [])
 
-    # for each group, open a <details> and its table…
-    for key, desc in cxi_groups:
-        html.append(f"<details><summary><strong>{key}</strong> — {desc}</summary>")
+    # build a fast index:  {(group, counter_name): {"desc":…, "unit":…, "iface_vals":{i:v}}}
+    index: dict[tuple[str, str], dict] = {}
+    for entry in collected:
+        for g, desc in zip(entry.get("groups", []), entry.get("descriptions", [])):
+            key = (g, entry["counter_name"])
+            rec = index.setdefault(key, {
+                "description": desc,
+                "unit": (entry.get("units") or [""])[0],
+                "iface_vals": {i: 0 for i in range(1, 9)}
+            })
+            rec["iface_vals"][entry["interface"]] = entry["value"]
+
+    # render one <details> per group
+    for g_key, g_desc in cxi_groups:
+        html.append(f"<details><summary><strong>{g_key}</strong> — {g_desc}</summary>")
         html.append(
-            "<table>"
-            "<tr>"
-              "<th>ID #</th><th>Interface #</th>"
-              "<th>Counter Name</th><th>Value</th><th>Description</th>"
+            "<table><tr>"
+            "<th>Counter Name</th><th>Description</th><th>Unit</th>" +
+            "".join(f"<th>Iface&nbsp;{i}</th>" for i in range(1, 9)) +
             "</tr>"
         )
 
-        # …then add one <tr> per matching entry…
-        for entry in collected:
-            if key in entry.get("groups", []):
-                idx        = entry["groups"].index(key)
-                group_desc = entry["descriptions"][idx]
-                html.append(
-                    "<tr>"
-                    f"<td>{entry['id']}</td>"
-                    f"<td>{entry['interface']}</td>"
-                    f"<td>{entry['counter_name']}</td>"
-                    f"<td>{entry['value']}</td>"
-                    f"<td title=\"{group_desc}\">{group_desc}</td>"
-                    "</tr>"
-                )
+        # pull rows for this group, sorted by counter_name
+        rows = [(k, itm) for k, itm in index.items() if k[0] == g_key]
+        for (grp, counter_name), item in sorted(rows, key=lambda t: t[0][1]):  # sort by counter_name
+            html.append("<tr>")
+            html.append(f"<td>{counter_name}</td>")
+            html.append(f"<td title='{item['description']}'>{item['description']}</td>")
+            html.append(f"<td>{item['unit']}</td>")
+            for i in range(1, 9):
+                html.append(f"<td>{item['iface_vals'].get(i, 0)}</td>")
+            html.append("</tr>")
 
-        # …and *only after* all rows, close the table and the details tag
+
         html.append("</table></details>")
 
-    # --- end collapsible groups ---
 
-    # End HTML
-    html.append("</body></html>")
-
-    with open(output_file, 'w') as f:
-        f.write('\n'.join(html))
+    # ------------------------------------------------------------------ #
+    # 10.  Finish & write file                                           #
+    # ------------------------------------------------------------------ #
+    html.append("</main></body></html>")
+    with open(output_file, "w") as f:
+        f.write("\n".join(html))
 
     print(f"HTML report saved to: {output_file}")
+
+
