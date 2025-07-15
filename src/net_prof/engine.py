@@ -7,8 +7,11 @@ import re
 import csv
 from typing import Dict, List, Tuple, Any, Optional
 from .visualize import (
-    iface1_barchart, iface2_barchart, iface3_barchart, iface4_barchart,
-    iface5_barchart, iface6_barchart, iface7_barchart, iface8_barchart
+    generate_iface_barchart,   
+    non_zero_bar_chart,        
+    group_barchart,            
+    unit_barchart,             
+    heat_map,                  
 )
 from datetime import datetime, timezone
 
@@ -340,22 +343,18 @@ def dump_html(summary: dict, output_file: str):
     # 1.  Make /charts dir & render 8 bar-charts                         #
     # ------------------------------------------------------------------ #
     charts_dir = os.path.join(os.path.dirname(output_file), "charts")
-    existed = os.path.isdir(charts_dir)
     os.makedirs(charts_dir, exist_ok=True)
-    if existed:
-        print(f"Charts directory already exists at: {charts_dir}")
-    else:
-        print(f"Created charts directory at:      {charts_dir}")
 
-    iface1_barchart(summary, os.path.join(charts_dir, "iface1.png"))
-    iface2_barchart(summary, os.path.join(charts_dir, "iface2.png"))
-    iface3_barchart(summary, os.path.join(charts_dir, "iface3.png"))
-    iface4_barchart(summary, os.path.join(charts_dir, "iface4.png"))
-    iface5_barchart(summary, os.path.join(charts_dir, "iface5.png"))
-    iface6_barchart(summary, os.path.join(charts_dir, "iface6.png"))
-    iface7_barchart(summary, os.path.join(charts_dir, "iface7.png"))
-    iface8_barchart(summary, os.path.join(charts_dir, "iface8.png"))
-    print(f"Generated 8 chart images in:       {charts_dir}")
+    # 8 × per-interface bar charts
+    for i in range(1, 9):
+        generate_iface_barchart(summary,
+                                iface=i,
+                                output_path=os.path.join(charts_dir, f"iface{i}.png"))
+
+    non_zero_bar_chart(summary, os.path.join(charts_dir, "non_zero.png"))
+    group_barchart(summary,     os.path.join(charts_dir, "groups.png"))
+    unit_barchart(summary,      os.path.join(charts_dir, "units.png"))
+    heat_map(summary, output_path=os.path.join(charts_dir, "heatmap.png"))
 
     now = datetime.now(timezone.utc)
 
@@ -420,7 +419,7 @@ def dump_html(summary: dict, output_file: str):
     html.append("</table>")
 
     # ------------------------------------------------------------------ #
-    # 5.  NEW  — Counters-per-group table                                #
+    # 5.  Counters-per-group table                                #
     # ------------------------------------------------------------------ #
     collected = summary.get("collected", [])
     group_counts: dict[str, int] = {}
@@ -440,10 +439,30 @@ def dump_html(summary: dict, output_file: str):
     # 6.  Charts section (collapsed)                                     #
     # ------------------------------------------------------------------ #
     html.append("<details>")
-    html.append("<summary><h2>Top 20 Diffs by Interface — Charts</h2></summary>")
+    html.append("<summary><h2>Charts &amp; Dashboards</h2></summary>")
+
+    # 6-A  Interface-specific bar charts
+    html.append("<h3>Interface View</h3>")
     for i in range(1, 9):
         html.append(f"<h4>Interface {i}</h4>")
-        html.append(f"<img src='charts/iface{i}.png' alt='Interface {i} bar chart'>")
+        html.append(f"<img src='charts/iface{i}.png' "
+                    f"alt='Top-20 diffs for interface {i}'>")
+
+    # 6-B  Cross-interface summaries
+    html.append("<h3>Cross-Interface Views</h3>")
+    html.append("<h4>Non-zero Diffs (all ifaces)</h4>")
+    html.append("<img src='charts/non_zero.png' "
+                "alt='Non-zero diffs summary'>")
+
+    html.append("<h4>Top Counter Groups</h4>")
+    html.append("<img src='charts/groups.png' alt='Group frequency bar chart'>")
+
+    html.append("<h4>Counters by Unit</h4>")
+    html.append("<img src='charts/units.png' alt='Units distribution bar chart'>")
+
+    html.append("<h4>Heat-map of Top-20 Metrics</h4>")
+    html.append("<img src='charts/heatmap.png' alt='Metric heat-map'>")
+
     html.append("</details>")
 
     # ------------------------------------------------------------------ #

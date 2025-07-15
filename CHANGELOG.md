@@ -1,4 +1,10 @@
 # Changelog:
+## [0.1.10] - 7-15-2025
+### Added
+- Added new charts to visualize.py
+- New charts are now displayed on .html dump_summary() output
+- bar_chart() renamed to non_zero_barchart()
+
 ## [0.1.9] - 7-10-2025
 ### Added
 - Changes to html output, cleaned up, added units
