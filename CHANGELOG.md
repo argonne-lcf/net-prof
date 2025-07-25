@@ -1,4 +1,8 @@
 # Changelog:
+## [0.1.11] - 7-25-2025
+### Added
+- Added support for a compare() function
+
 ## [0.1.10] - 7-15-2025
 ### Added
 - Added new charts to visualize.py

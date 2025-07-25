@@ -14,6 +14,7 @@ from .visualize import (
     heat_map,                  
 )
 from datetime import datetime, timezone
+from collections import defaultdict
 
 def load_lines(path: str) -> List[str]:
     """Read a file and return a list of its lines (no trailing newline)."""
@@ -23,7 +24,6 @@ def load_lines(path: str) -> List[str]:
 def parse_metric_name(raw: str) -> str:
     """Return the metric name (last whitespace-separated token)."""
     return raw.strip().split()[-1]
-
 
 def parse_counter(raw: str) -> int:
     """Given 'value@timestamp', return the integer counter before the @."""
@@ -277,6 +277,12 @@ def summarize(before_path: str,
         iface_rs.sort(key=lambda r: abs(r['diff']), reverse=True)
         top20_per_iface[i] = iface_rs[:20]
 
+    #  NEW: keep every (iface, metric_id) → diff  in one dict
+    full_diffs: Dict[Tuple[int, int], int] = {
+        (entry["iface"], entry["metric_id"]): entry["diff"]
+        for entry in results
+    }
+
     # pivot out the “important” metrics
     important_ids = [
         17, 18, 22, 839, 835, 869, 873,
@@ -303,9 +309,9 @@ def summarize(before_path: str,
         'non_zero_per_iface': non_zero_per_iface,
         'top20_per_iface':   top20_per_iface,
         'important_metrics': pivot,
-        'collected':         before_list if is_json else []
+        'collected':         before_list if is_json else [],
+        'full_diffs':         full_diffs
     }
-
 
 def dump(summary: Dict[str, Any]):
     """Nicely print summary to the console."""
@@ -331,17 +337,13 @@ def dump(summary: Dict[str, Any]):
         for i in range(1,9):
             diff = data['diffs'].get(i, 0)
             row += f" {diff:<{iface_w}}"
-        print(row)
-        
+        print(row)     
         
 def dump_html(summary: dict, output_file: str):
     """
     Write the summary as a self-contained HTML report with charts.
     """
-
-    # ------------------------------------------------------------------ #
-    # 1.  Make /charts dir & render 8 bar-charts                         #
-    # ------------------------------------------------------------------ #
+    #  Make /charts dir & render 8 bar-charts
     charts_dir = os.path.join(os.path.dirname(output_file), "charts")
     os.makedirs(charts_dir, exist_ok=True)
 
@@ -358,9 +360,7 @@ def dump_html(summary: dict, output_file: str):
 
     now = datetime.now(timezone.utc)
 
-    # ------------------------------------------------------------------ #
-    # 2.  Start HTML / CSS                                               #
-    # ------------------------------------------------------------------ #
+    #  Start HTML / CSS
     html: list[str] = []
     html.append(f"<html><head><title>Net-Prof Report — {now}</title>")
     html.append(r"""
@@ -380,10 +380,7 @@ def dump_html(summary: dict, output_file: str):
  img   { border:1px solid #ddd; border-radius:4px; margin-bottom:1rem; max-width:100% }
 </style></head><body><main>
 """)
-
-    # ------------------------------------------------------------------ #
-    # 3.  Header & meta                                                  #
-    # ------------------------------------------------------------------ #
+    # 3.  Header & metadata
     html.append(f"<h1>Net-Prof Summary <small style='font-size:0.6em'>(created {now})</small></h1>")
     html.append(f"<h2>Total Non-zero Diffs: {summary['total_non_zero']} / 15120</h2>")
 
@@ -409,18 +406,14 @@ def dump_html(summary: dict, output_file: str):
                     f"Finished at: {am['finished_at']} "
                     f"(took {am['duration_s']:.2f}s)</p>")
 
-    # ------------------------------------------------------------------ #
-    # 4.  Non-zero per-iface table                                       #
-    # ------------------------------------------------------------------ #
+    #  Non-zero per-iface table
     html.append("<h3>Non-zero Diffs by Interface</h3>")
     html.append("<table><tr><th>Interface</th><th>Non-zero Count</th></tr>")
     for iface, count in summary['non_zero_per_iface'].items():
         html.append(f"<tr><td>Interface {iface}</td><td>{count} / 1890</td></tr>")
     html.append("</table>")
 
-    # ------------------------------------------------------------------ #
-    # 5.  Counters-per-group table                                #
-    # ------------------------------------------------------------------ #
+    #  Counters-per-group table
     collected = summary.get("collected", [])
     group_counts: dict[str, int] = {}
     for entry in collected:
@@ -435,20 +428,18 @@ def dump_html(summary: dict, output_file: str):
             html.append(f"<tr><td>{g}</td><td>{n}</td></tr>")
         html.append("</table>")
 
-    # ------------------------------------------------------------------ #
-    # 6.  Charts section (collapsed)                                     #
-    # ------------------------------------------------------------------ #
+    #  Charts section (collapsed)
     html.append("<details>")
     html.append("<summary><h2>Charts &amp; Dashboards</h2></summary>")
 
-    # 6-A  Interface-specific bar charts
+    #  Interface-specific bar charts
     html.append("<h3>Interface View</h3>")
     for i in range(1, 9):
         html.append(f"<h4>Interface {i}</h4>")
         html.append(f"<img src='charts/iface{i}.png' "
                     f"alt='Top-20 diffs for interface {i}'>")
 
-    # 6-B  Cross-interface summaries
+    #  Cross-interface summaries
     html.append("<h3>Cross-Interface Views</h3>")
     html.append("<h4>Non-zero Diffs (all ifaces)</h4>")
     html.append("<img src='charts/non_zero.png' "
@@ -465,9 +456,8 @@ def dump_html(summary: dict, output_file: str):
 
     html.append("</details>")
 
-    # ------------------------------------------------------------------ #
-    # 7.  Top-20 raw tables (collapsed)                                  #
-    # ------------------------------------------------------------------ #
+
+    #  Top-20 raw tables (collapsed)
     html.append("<details>")
     html.append("<summary><h2>Top 20 Diffs by Interface — Raw Tables</h2></summary>")
     for iface, entries in summary['top20_per_iface'].items():
@@ -479,9 +469,8 @@ def dump_html(summary: dict, output_file: str):
         html.append("</table>")
     html.append("</details>")
 
-    # ------------------------------------------------------------------ #
-    # 8.  Important metrics (collapsible)                                #
-    # ------------------------------------------------------------------ #
+
+    #  Important metrics (collapsible)
     html.append("<details>")
     html.append("<summary><h2>Important Metrics</h2></summary>")
     html.append("<table><tr><th>Metric ID</th><th>Metric Name</th>" +
@@ -493,9 +482,7 @@ def dump_html(summary: dict, output_file: str):
         html.append("</tr>")
     html.append("</table></details>")
 
-    # ------------------------------------------------------------------ #
-    # 9.  Counter-groups detail (one row per counter, 8 iface columns)   #
-    # ------------------------------------------------------------------ #
+    #  Counter-groups detail (one row per counter, 8 iface columns)
     html.append("<h2>Counter Groups Detail</h2>")
 
     cxi_groups = [
@@ -548,17 +535,140 @@ def dump_html(summary: dict, output_file: str):
                 html.append(f"<td>{item['iface_vals'].get(i, 0)}</td>")
             html.append("</tr>")
 
-
         html.append("</table></details>")
-
-
-    # ------------------------------------------------------------------ #
-    # 10.  Finish & write file                                           #
-    # ------------------------------------------------------------------ #
+        
+    #  Finish & write file                                          
     html.append("</main></body></html>")
     with open(output_file, "w") as f:
         f.write("\n".join(html))
 
     print(f"HTML report saved to: {output_file}")
 
+def compare(summary_a: Dict[str, Any],
+            summary_b: Dict[str, Any],
+            output_file: str,
+            *,
+            label_a: str = "Test A",
+            label_b: str = "Test B",
+            min_diff: int = 1,
+) -> Dict[str, Any]:
+    """
+    Compare two `summarize()` results and write a single HTML report.
 
+    Parameters
+    ----------
+    summary_a, summary_b : Dict
+        The dicts returned by `engine.summarize()`.
+    output_file : str
+        Path of the HTML file to create.
+    label_a, label_b : str
+        Human-friendly names shown in the report headings.
+    min_diff : int
+        Ignore metrics whose absolute diff changed by less than this.
+        (Helps filter out background noise.)
+
+    Returns
+    -------
+    Dict[str, Any]
+        A machine-readable diff structure (see bottom of function).
+    """
+    
+    # ------------------------------------------------------------------ #
+    #  Quick sanity checks
+    # ------------------------------------------------------------------ #
+    required_keys = ("full_diffs", "non_zero_per_iface")
+    for k in required_keys:
+        if k not in summary_a or k not in summary_b:
+            raise ValueError(f"compare(): missing key {k!r}; are these summarize() outputs?")
+    # ------------------------------------------------------------------ #
+    #  Per-interface non-zero count delta                             #
+    # ------------------------------------------------------------------ #
+    delta_non_zero = {
+        i: summary_b["non_zero_per_iface"].get(i, 0)
+           - summary_a["non_zero_per_iface"].get(i, 0)
+        for i in range(1, 9)
+    }
+    # Load master list of metric names so every ID resolves
+    metrics_path = os.path.join(os.path.dirname(__file__), "data", "metrics.txt")
+    id_to_name = {idx + 1: parse_metric_name(line)
+                  for idx, line in enumerate(load_lines(metrics_path))}
+    # ------------------------------------------------------------------ #
+    #  Per-metric diff change                                         #
+    # ------------------------------------------------------------------ #
+    full_a: Dict[Tuple[int, int], int] = summary_a.get("full_diffs", {})
+    full_b: Dict[Tuple[int, int], int] = summary_b.get("full_diffs", {})
+    
+    changed_metrics: Dict[Tuple[int, int], Dict[str, int]] = {}
+    for (iface, mid) in full_a.keys() | full_b.keys():
+        old   = full_a.get((iface, mid), 0)
+        new   = full_b.get((iface, mid), 0)
+        delta = new - old
+        if abs(delta) < min_diff:
+            continue
+        changed_metrics[(iface, mid)] = {"old": old, "new": new, "delta": delta}
+
+        # keep delta_non_zero accurate
+        if old == 0 and new != 0:
+            delta_non_zero[iface] += 1
+        elif old != 0 and new == 0:
+            delta_non_zero[iface] -= 1
+    # ------------------------------------------------------------------ #
+    #  Write HTML report                                              #
+    # ------------------------------------------------------------------ #
+    html: list[str] = []
+    html.append("<html><head><title>net_prof — Compare Report</title>"
+                "<style>body{font-family:sans-serif;margin:2rem;}table{border-collapse:collapse}"
+                "th,td{border:1px solid #ccc;padding:0.3rem}</style></head><body>")
+    html.append(f"<h1>Compare Report</h1>")
+    html.append(f"<h2>{label_a}  ↔  {label_b}</h2>")
+
+    # Per-interface non-zero delta table
+    html.append("<h3>Δ Non-zero counter diffs per interface</h3>")
+    html.append("<table><tr><th>Interface</th>"
+                f"<th>{label_a}</th><th>{label_b}</th><th>Δ</th></tr>")
+    for i in range(1, 9):
+        a_cnt = summary_a['non_zero_per_iface'].get(i, 0)
+        b_cnt = summary_b['non_zero_per_iface'].get(i, 0)
+        d_cnt = delta_non_zero[i]
+        html.append(f"<tr><td>Iface {i}</td><td>{a_cnt}</td><td>{b_cnt}</td>"
+                    f"<td style='color:{'red' if d_cnt>0 else 'green' if d_cnt<0 else 'black'}'>"
+                    f"{d_cnt:+}</td></tr>")
+    html.append("</table>")
+
+    # Metrics whose diff changed
+    html.append("<h3>Metrics with changed diffs (|Δ| ≥ "
+                f"{min_diff}) — sorted by |Δ| desc</h3>")
+    html.append("<table><tr><th>Interface</th><th>Metric ID</th>"
+                "<th>Metric Name</th>"
+                f"<th>Diff {label_a}</th><th>Diff {label_b}</th><th>Δ</th></tr>")
+
+    for (iface, mid), vals in sorted(
+            changed_metrics.items(),
+            key=lambda kv: abs(kv[1]["new"] - kv[1]["old"]),
+            reverse=True):
+
+        name  = id_to_name.get(mid, f"Metric {mid}")
+        old   = vals["old"]
+        new   = vals["new"]
+        delta = new - old
+
+        html.append(
+            f"<tr><td>Iface {iface}</td><td>{mid}</td><td>{name}</td>"
+            f"<td>{old}</td><td>{new}</td>"
+            f"<td style='color:{'red' if delta>0 else 'green' if delta<0 else 'black'}'>"
+            f"{delta:+}</td></tr>"
+        )
+    html.append("</table>")
+
+    html.append("</body></html>")
+    with open(output_file, "w") as f:
+        f.write("\n".join(html))
+
+    print(f"Compare report saved to: {output_file}")
+
+    #  Return machine-readable diff
+
+    return {
+        "delta_non_zero_per_iface": delta_non_zero,
+        "changed_metrics": changed_metrics,
+    }

@@ -136,7 +136,8 @@ compare(idle_test, ping_test, report_idle_vs_ping.html)
 
 ![Alt text](docs/image1.png)
 ![Alt text](docs/image2.png)
-![Alt text](docs/net_prof_iface_chart.png)
+![Alt text](docs/non_zero.png)
+![Alt text](docs/units.png)
 ![Alt text](docs/net_prof_sum_html.png)
 
 ## References
