@@ -109,12 +109,10 @@ net_prof.dump_html(net_prof.summarize("before_faulty.json", "after_faulty.json")
 
 ### Notes
 - We are aware that the Ping issue may not be purely due to cxi or nics, there could be many other reasons like memory, network switches or hardware going down, however this tool is helpful to gain network insights.
-- A function such as compare() should be devoloped -- This could allow a user to compare a "idle" test to a "real" test, which visualizes changes between the tests.
-
-It could be implemented as such:
+- A compare() function is currently in devolopment. In v0.1.11, this function was introduced. The compare() function serves the purpose to show the effective difference between two different workloads, in an effort to discern "real" counter changes from random noise.
+- Compare is not a finished function, however it's still useful in the state it is in currently.
 ```
-# DO NOT FOLLOW THIS CODE. THIS IS A REPRESENTATION OF WHAT CAPABALITIES I WANT net_prof TO HAVE IN THE FUTURE
-# psuedocode:
+# Compare() functionality (semi pseudo-code):
 
 net_prof.collect(before_idle.json)
 time.sleep(5) # doing effectively "nothing" or just idling...
@@ -128,9 +126,8 @@ net_prof.collect(after_ping.json)
 
 ping_test = net_prof.summarize(before_ping.json, after_ping.json)
 
-compare(idle_test, ping_test, report_idle_vs_ping.html)
+net_prof.compare(idle_test, ping_test, report_idle_vs_ping.html, label_a="Idle baseline", label_b="Ping workload")
 ```
-
 
 ## Profiler Snapshots
 
@@ -142,9 +139,7 @@ compare(idle_test, ping_test, report_idle_vs_ping.html)
 
 ## References
 
-https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
-
-https://github.com/argonne-lcf/net_prof
-
-https://pypi.org/project/net_prof/
+- https://cpe.ext.hpe.com/docs/latest/getting_started/HPE-Cassini-Performance-Counters.html
+- https://github.com/argonne-lcf/net_prof
+- https://pypi.org/project/net_prof/
 

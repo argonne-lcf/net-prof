@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: net_prof
-Version: 0.1.10
+Version: 0.1.11
 Summary: Network Profiler for the HPE Cassini Cray NIC
 Author-email: Anthony Cardia <acardia@protonmail.com>, Kaushik Velusamy <kaushikvelusamy@gmail.com>
 Project-URL: Homepage, https://github.com/argonne-lcf/net_prof
@@ -150,7 +150,8 @@ compare(idle_test, ping_test, report_idle_vs_ping.html)
 
 ![Alt text](docs/image1.png)
 ![Alt text](docs/image2.png)
-![Alt text](docs/net_prof_iface_chart.png)
+![Alt text](docs/non_zero.png)
+![Alt text](docs/units.png)
 ![Alt text](docs/net_prof_sum_html.png)
 
 ## References
