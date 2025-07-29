@@ -110,7 +110,7 @@ net_prof.dump_html(net_prof.summarize("before_faulty.json", "after_faulty.json")
 ### Notes
 - We are aware that the Ping issue may not be purely due to cxi or nics, there could be many other reasons like memory, network switches or hardware going down, however this tool is helpful to gain network insights.
 - A compare() function is currently in devolopment. In v0.1.11, this function was introduced. The compare() function serves the purpose to show the effective difference between two different workloads, in an effort to discern "real" counter changes from random noise.
-- Compare is not a finished function, however it's still useful in the state it is in currently.
+- Compare is not a finished function, and there is some sort of error in my code causing the compared tests to always be the same. A fix will be introduced in the future. 
 ```
 # Compare() functionality (semi pseudo-code):
 
